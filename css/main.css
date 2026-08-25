@@ -51,6 +51,7 @@
 .stat-pill b { color: var(--text); font-weight: 600; }
 a.stat-pill:hover { text-decoration: none; border-color: var(--accent); color: var(--text); }
 
+.theme-menu[hidden] { display: none; }
 .theme-menu {
   position: absolute;
   right: max(24px, calc((100% - var(--max-w)) / 2));
@@ -382,4 +383,7 @@ footer { padding: 48px 0 64px; color: var(--text-dim); font-size: .85rem; }
   .merge-grid i { height: 20px; }
   .demo-grid { grid-template-columns: repeat(auto-fill, minmax(74px, 1fr)); }
   .stat-pill.hide-sm { display: none; }
+  .nav-inner { gap: 12px; }
+  .btn-gh { padding: 7px 10px; font-size: .8rem; }
+  .nav-actions { gap: 7px; }
 }
