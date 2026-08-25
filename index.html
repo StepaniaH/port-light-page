@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Port-Light — every port, one glance</title>
+  <meta name="description" content="A local web dashboard that shows which host ports are taken, as a traffic-light grid. Merges listen tables, Docker and Compose into one honest occupancy map.">
+  <meta property="og:title" content="Port-Light — every port, one glance">
+  <meta property="og:description" content="Know which port is taken, by what, and which are free. A traffic-light occupancy map for your homelab.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0c1016">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">
+        <img src="assets/icon.png" alt="" width="28" height="28">
+        <span>Port-Light</span>
+      </a>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#how" data-i18n="nav.how">How it works</a>
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#agents" data-i18n="nav.agents">Agents</a>
+        <a href="#quickstart" data-i18n="nav.quickstart">Quick start</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="stat-pill" href="https://github.com/StepaniaH/port-light" target="_blank" rel="noopener" title="GitHub stars">★ <b id="stat-stars">—</b></a>
+        <button id="nav-theme-btn" class="nav-btn" aria-haspopup="listbox" aria-expanded="false" title="Theme">🎨</button>
+        <button id="nav-lang-btn" class="nav-btn" title="Language">EN</button>
+        <a class="btn btn-gh" href="https://github.com/StepaniaH/port-light" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div id="theme-menu" class="theme-menu" role="listbox" aria-label="Theme" hidden></div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="kicker" data-i18n="hero.kicker">Port occupancy map for homelabs</p>
+          <h1 data-i18n="hero.title">Every port. One glance. Zero guesswork.</h1>
+          <p class="lead" data-i18n="hero.sub">Port-Light turns your host's listen tables, Docker, and Compose files into one traffic-light grid — so you always know which port is taken, by what, and which are free.</p>
+          <div class="hero-cta">
+            <button class="btn primary" data-copy="docker pull stepaniah/port-light">docker pull stepaniah/port-light</button>
+            <a class="btn" href="https://github.com/StepaniaH/port-light" target="_blank" rel="noopener" data-i18n="hero.github">Star on GitHub</a>
+          </div>
+          <div class="hero-stats">
+            <span class="stat-pill"><b id="stat-pulls">4.4K</b>&nbsp;<span data-i18n="stats.pulls">Docker pulls</span></span>
+            <span class="stat-pill">v0.7.0</span>
+          </div>
+        </div>
+        <div class="hero-demo">
+          <div class="demo-panel" aria-label="Interactive product demo (simulated data)">
+            <span class="demo-lighthouse" aria-hidden="true">
+              <img src="assets/icon.png" alt="" width="24" height="24">
+              <i class="beam"></i>
+            </span>
+            <div class="demo-head">
+              <input id="demo-search" type="text" inputmode="numeric" autocomplete="off" placeholder="Try 3000…" data-i18n-attr="placeholder:demo.search" aria-label="Search ports">
+            </div>
+            <p id="demo-counts" class="demo-counts">45 in use · 4 configured</p>
+            <div id="demo-grid" class="demo-grid"></div>
+            <p class="demo-note" data-i18n="demo.note">live demo · simulated data</p>
+            <div id="demo-toast" class="demo-toast" hidden></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="wrap">
+        <div data-reveal>
+          <p class="kicker" data-i18n="how.kicker">How it works</p>
+          <h2 data-i18n="how.title">Three local sources. One honest map.</h2>
+          <p class="lead" data-i18n="how.lead">No agents to install, nothing leaves the machine. Port-Light reads what is already true on your host and merges it into a single grid.</p>
+        </div>
+        <div class="sources" data-reveal>
+          <div class="source-card">
+            <h3 data-i18n="how.s1.t">Host listen tables · /proc, ss</h3>
+            <p data-i18n="how.s1.b">TCP/UDP ports actually bound right now.</p>
+          </div>
+          <div class="source-card">
+            <h3 data-i18n="how.s2.t">Docker API</h3>
+            <p data-i18n="how.s2.b">Container names, status, images, published mappings.</p>
+          </div>
+          <div class="source-card">
+            <h3 data-i18n="how.s3.t">Compose files</h3>
+            <p data-i18n="how.s3.b">Ports that are declared — even when the stack is stopped.</p>
+          </div>
+        </div>
+        <div class="merge-arrow" aria-hidden="true" data-reveal>↓</div>
+        <div class="merge-visual" aria-hidden="true" data-reveal>
+          <div class="merge-grid">
+            <i class="u"></i><i class="u"></i><i class="c"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="c"></i><i class="u"></i>
+            <i class="u"></i><i class="c"></i><i class="u"></i><i class="u"></i><i class="f"></i><i class="u"></i><i class="u"></i><i class="c"></i>
+            <i class="u"></i><i class="u"></i><i class="u"></i><i class="f"></i><i class="u"></i><i class="c"></i><i class="u"></i><i class="u"></i>
+          </div>
+        </div>
+        <div class="legend" data-reveal>
+          <span><i class="dot" style="background: var(--used)"></i><span data-i18n="how.legend.used">In use — something is listening</span></span>
+          <span><i class="dot" style="background: var(--configured)"></i><span data-i18n="how.legend.configured">Configured — declared, but quiet</span></span>
+          <span><i class="dot" style="background: var(--free)"></i><span data-i18n="how.legend.free">Free — offered when you search</span></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div data-reveal>
+          <p class="kicker" data-i18n="features.kicker">Features</p>
+          <h2 data-i18n="features.title">Built for people who run too many stacks.</h2>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card" data-reveal>
+            <span class="ico" aria-hidden="true">🔍</span>
+            <h3 data-i18n="f1.t">Search that suggests</h3>
+            <p data-i18n="f1.b">Type a port number; if it's taken, nearby free ones light up.</p>
+          </div>
+          <div class="feature-card" data-reveal>
+            <span class="ico" aria-hidden="true">⚠️</span>
+            <h3 data-i18n="f2.t">Conflict radar</h3>
+            <p data-i18n="f2.b">Two Compose projects claiming the same host port get flagged before they collide.</p>
+          </div>
+          <div class="feature-card" data-reveal>
+            <span class="ico" aria-hidden="true">🖥️</span>
+            <h3 data-i18n="f3.t">Multi-host, one screen</h3>
+            <p data-i18n="f3.b">Pull occupancy maps from other Port-Light instances over LAN or Tailscale.</p>
+          </div>
+          <div class="feature-card" data-reveal>
+            <span class="ico" aria-hidden="true">⚡</span>
+            <h3 data-i18n="f4.t">Live, not stale</h3>
+            <p data-i18n="f4.b">SSE pushes a refresh the moment occupancy changes; local history records every transition.</p>
+          </div>
+          <div class="feature-card" data-reveal>
+            <span class="ico" aria-hidden="true">🪝</span>
+            <h3 data-i18n="f5.t">Hooks &amp; metrics</h3>
+            <p data-i18n="f5.b">Optional webhooks on new listeners and conflicts; Prometheus aggregates when you want them.</p>
+          </div>
+          <div class="feature-card" data-reveal>
+            <span class="ico" aria-hidden="true">🤖</span>
+            <h3 data-i18n="f6.t">Agent-friendly API</h3>
+            <p data-i18n="f6.b">GET /api/ports/suggest hands your coding agent a genuinely free port — with leases.</p>
+          </div>
+          <div class="feature-card" data-reveal>
+            <span class="ico" aria-hidden="true">🎨</span>
+            <h3 data-i18n="f7.t">Speaks your theme</h3>
+            <p data-i18n="f7.b">Fifteen palettes from Gruvbox to Kanagawa; four UI languages.</p>
+          </div>
+          <div class="feature-card" data-reveal>
+            <span class="ico" aria-hidden="true">🔒</span>
+            <h3 data-i18n="f8.t">Stays on your machine</h3>
+            <p data-i18n="f8.b">No telemetry, no accounts, no cloud. Your port map never leaves the host.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="agents">
+      <div class="wrap">
+        <div data-reveal>
+          <p class="kicker" data-i18n="agents.kicker">For coding agents</p>
+          <h2 data-i18n="agents.title">Your agent picks ports. They stick.</h2>
+          <p class="lead" data-i18n="agents.lead">Coding agents guess ports and collide with your stacks. Port-Light exposes a tiny API — and an MCP stdio server — that hands out genuinely free ports, optionally reserving them with an expiring lease.</p>
+        </div>
+        <div class="terminal" data-reveal>
+          <div class="terminal-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+          <pre><button class="copy-btn" data-i18n="copy">copy</button><span class="prompt">$ </span>curl -s "http://127.0.0.1:2100/api/ports/suggest?count=2&amp;reserve=true&amp;ttl=3600&amp;label=preview"
+
+<span class="out">{
+  "ports": [8081, 8082],
+  "reserved": [8081, 8082],
+  "range": { "start": 1, "end": 9999 }
+}</span></pre>
+        </div>
+        <p class="agents-link" data-reveal><a href="https://github.com/StepaniaH/port-light/blob/main/docs/integrations.md" target="_blank" rel="noopener" data-i18n="agents.link">MCP server · agent skill · API docs →</a></p>
+      </div>
+    </section>
+
+    <section id="themes">
+      <div class="wrap">
+        <div data-reveal>
+          <p class="kicker" data-i18n="themes.kicker">Appearance</p>
+          <h2 data-i18n="themes.title">Fifteen palettes. Pick yours.</h2>
+          <p class="lead" data-i18n="themes.lead">Click one — the whole site re-skins, just like the app.</p>
+        </div>
+        <div id="theme-gallery" class="theme-gallery"></div>
+      </div>
+    </section>
+
+    <section id="quickstart">
+      <div class="wrap">
+        <div data-reveal>
+          <p class="kicker" data-i18n="quickstart.kicker">Quick start</p>
+          <h2 data-i18n="quickstart.title">Up in one minute.</h2>
+        </div>
+        <div class="two-col">
+          <pre class="codeblock" data-reveal><button class="copy-btn" data-i18n="copy">copy</button>services:
+  port-light:
+    image: stepaniah/port-light:v0.7.0
+    container_name: port-light
+    restart: unless-stopped
+    ports:
+      - "2100:2100"
+    volumes:
+      - /path/to/your/compose-stacks:/compose:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc:/host/proc:ro
+      - ./data:/data
+    environment:
+      COMPOSE_SCAN_DIR: /compose</pre>
+          <div class="qs-side" data-reveal>
+            <pre class="codeblock"><button class="copy-btn" data-i18n="copy">copy</button>mkdir -p data
+docker compose up -d</pre>
+            <p class="qs-open">→ <span class="mono">http://localhost:2100</span></p>
+            <p class="qs-note" data-i18n="quickstart.note">Images for linux/amd64 and arm64, also on GHCR. Prefer version tags over latest.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="limits">
+      <div class="wrap" data-reveal>
+        <h2 data-i18n="limits.title">A port occupancy map — not a container manager.</h2>
+        <p class="lead" data-i18n="limits.body">Port-Light doesn't start or stop containers, tail logs, or replace Portainer. It's a LAN tool: set Basic Auth or keep it behind a reverse proxy, and never expose port 2100.</p>
+        <p class="limits-links">
+          <a href="https://github.com/StepaniaH/port-light/blob/main/SECURITY.md" target="_blank" rel="noopener">SECURITY.md</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot-inner">
+      <div class="foot-brand">
+        <img src="assets/icon.png" alt="" width="22" height="22">
+        <span>Port-Light</span>
+      </div>
+      <div class="foot-links">
+        <a href="https://github.com/StepaniaH/port-light" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://hub.docker.com/r/stepaniah/port-light" target="_blank" rel="noopener">Docker Hub</a>
+        <a href="https://github.com/StepaniaH/port-light/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a>
+        <a href="https://ko-fi.com/stepaniah" target="_blank" rel="noopener">Ko-fi</a>
+      </div>
+      <a class="ph-badge" href="https://www.producthunt.com/products/port-light" target="_blank" rel="noopener noreferrer">
+        <img alt="Port Light - A web dashboard shows your port usage as a traffic-light. | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1203037&theme=dark&t=1784992647570">
+      </a>
+      <p class="foot-fine" data-i18n="footer.telemetry">MIT © 2026 StepaniaH · No telemetry.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

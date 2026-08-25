@@ -1,0 +1,301 @@
+/* Port-Light landing page — design tokens & palettes.
+   Palette values are copied verbatim from port-light/frontend/style.css. */
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/space-grotesk-latin.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+:root {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --max-w: 1120px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0c1016;
+  --elevated: #12171f;
+  --card: #161c25;
+  --card-hover: #1c2430;
+  --border: #2b3440;
+  --text: #e6edf3;
+  --text-dim: #8b98a5;
+  --used: #58a6ff;
+  --configured: #d4a017;
+  --free: #3fb950;
+  --accent: #58a6ff;
+  --conflict: #e08532;
+  --danger: #f85149;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f3f5f7;
+  --elevated: #ffffff;
+  --card: #ffffff;
+  --card-hover: #eef1f4;
+  --border: #d5dce3;
+  --text: #1f2328;
+  --text-dim: #5c6770;
+  --used: #0969da;
+  --configured: #9a6700;
+  --free: #1a7f37;
+  --accent: #0969da;
+  --conflict: #bc4c00;
+  --danger: #cf222e;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="gruvbox"] {
+  color-scheme: dark;
+  --bg: #282828;
+  --elevated: #32302f;
+  --card: #3c3836;
+  --card-hover: #504945;
+  --border: #504945;
+  --text: #ebdbb2;
+  --text-dim: #a89984;
+  --used: #83a598;
+  --configured: #d79921;
+  --free: #b8bb26;
+  --accent: #83a598;
+  --conflict: #fe8019;
+  --danger: #fb4934;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="gruvbox-light"] {
+  color-scheme: light;
+  --bg: #fbf1c7;
+  --elevated: #f9f5d7;
+  --card: #f2e5bc;
+  --card-hover: #ebdbb2;
+  --border: #d5c4a1;
+  --text: #3c3836;
+  --text-dim: #7c6f64;
+  --used: #076678;
+  --configured: #b57614;
+  --free: #79740e;
+  --accent: #076678;
+  --conflict: #af3a03;
+  --danger: #9d0006;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="catppuccin"] {
+  color-scheme: dark;
+  --bg: #1e1e2e;
+  --elevated: #181825;
+  --card: #313244;
+  --card-hover: #45475a;
+  --border: #45475a;
+  --text: #cdd6f4;
+  --text-dim: #a6adc8;
+  --used: #89b4fa;
+  --configured: #f9e2af;
+  --free: #a6e3a1;
+  --accent: #89b4fa;
+  --conflict: #fab387;
+  --danger: #f38ba8;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="catppuccin-latte"] {
+  color-scheme: light;
+  --bg: #eff1f5;
+  --elevated: #e6e9ef;
+  --card: #ffffff;
+  --card-hover: #e6e9ef;
+  --border: #ccd0da;
+  --text: #4c4f69;
+  --text-dim: #6c6f85;
+  --used: #1e66f5;
+  --configured: #df8e1d;
+  --free: #40a02b;
+  --accent: #1e66f5;
+  --conflict: #fe640b;
+  --danger: #d20f39;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="nord"] {
+  color-scheme: dark;
+  --bg: #2e3440;
+  --elevated: #3b4252;
+  --card: #434c5e;
+  --card-hover: #4c566a;
+  --border: #4c566a;
+  --text: #eceff4;
+  --text-dim: #81a1c1;
+  --used: #88c0d0;
+  --configured: #ebcb8b;
+  --free: #a3be8c;
+  --accent: #88c0d0;
+  --conflict: #d08770;
+  --danger: #bf616a;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="dracula"] {
+  color-scheme: dark;
+  --bg: #282a36;
+  --elevated: #21222c;
+  --card: #44475a;
+  --card-hover: #4d5066;
+  --border: #6272a4;
+  --text: #f8f8f2;
+  --text-dim: #6272a4;
+  --used: #8be9fd;
+  --configured: #f1fa8c;
+  --free: #50fa7b;
+  --accent: #bd93f9;
+  --conflict: #ffb86c;
+  --danger: #ff5555;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="tokyo-night"] {
+  color-scheme: dark;
+  --bg: #1a1b26;
+  --elevated: #16161e;
+  --card: #24283b;
+  --card-hover: #292e42;
+  --border: #3b4261;
+  --text: #c0caf5;
+  --text-dim: #9aa5ce;
+  --used: #7aa2f7;
+  --configured: #e0af68;
+  --free: #9ece6a;
+  --accent: #7aa2f7;
+  --conflict: #ff9e64;
+  --danger: #f7768e;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="one-dark"] {
+  color-scheme: dark;
+  --bg: #282c34;
+  --elevated: #21252b;
+  --card: #2c313a;
+  --card-hover: #3e4451;
+  --border: #3e4451;
+  --text: #abb2bf;
+  --text-dim: #5c6370;
+  --used: #61afef;
+  --configured: #e5c07b;
+  --free: #98c379;
+  --accent: #61afef;
+  --conflict: #d19a66;
+  --danger: #e06c75;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="solarized"] {
+  color-scheme: dark;
+  --bg: #002b36;
+  --elevated: #073642;
+  --card: #073642;
+  --card-hover: #094959;
+  --border: #586e75;
+  --text: #93a1a1;
+  --text-dim: #657b83;
+  --used: #268bd2;
+  --configured: #b58900;
+  --free: #859900;
+  --accent: #268bd2;
+  --conflict: #cb4b16;
+  --danger: #dc322f;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="solarized-light"] {
+  color-scheme: light;
+  --bg: #fdf6e3;
+  --elevated: #eee8d5;
+  --card: #eee8d5;
+  --card-hover: #e6ddc4;
+  --border: #93a1a1;
+  --text: #657b83;
+  --text-dim: #93a1a1;
+  --used: #268bd2;
+  --configured: #b58900;
+  --free: #859900;
+  --accent: #268bd2;
+  --conflict: #cb4b16;
+  --danger: #dc322f;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="everforest"] {
+  color-scheme: dark;
+  --bg: #2d353b;
+  --elevated: #343f44;
+  --card: #3d484d;
+  --card-hover: #475258;
+  --border: #4f585e;
+  --text: #d3c6aa;
+  --text-dim: #859289;
+  --used: #7fbbb3;
+  --configured: #dbbc7f;
+  --free: #a7c080;
+  --accent: #7fbbb3;
+  --conflict: #e69875;
+  --danger: #e67e80;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="rose-pine"] {
+  color-scheme: dark;
+  --bg: #191724;
+  --elevated: #1f1d2e;
+  --card: #26233a;
+  --card-hover: #2a273f;
+  --border: #403d52;
+  --text: #e0def4;
+  --text-dim: #908caa;
+  --used: #9ccfd8;
+  --configured: #f6c177;
+  --free: #31748f;
+  --accent: #c4a7e7;
+  --conflict: #ebbcba;
+  --danger: #eb6f92;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="kanagawa"] {
+  color-scheme: dark;
+  --bg: #1f1f28;
+  --elevated: #16161d;
+  --card: #2a2a37;
+  --card-hover: #363646;
+  --border: #54546d;
+  --text: #dcd7ba;
+  --text-dim: #727169;
+  --used: #7e9cd8;
+  --configured: #e6c384;
+  --free: #98bb6c;
+  --accent: #7e9cd8;
+  --conflict: #ffa066;
+  --danger: #ff5d62;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
