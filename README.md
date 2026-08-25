@@ -2,6 +2,8 @@
 
 Landing page for [Port-Light](https://github.com/StepaniaH/port-light), a local port-occupancy dashboard for homelab. Static HTML/CSS/JS — no npm, no build step, matching the app itself.
 
+**Live:** https://port-light-page.pages.dev
+
 ## Run locally
 
 ```bash
@@ -12,10 +14,13 @@ Then open `http://localhost:8321`.
 
 ## Deploy
 
-Hosted on Cloudflare Pages, deployed from `main`:
+Hosted on Cloudflare Pages at https://port-light-page.pages.dev. Deployments are direct uploads:
 
-- Build command: none
-- Output directory: `/` (repo root)
+```bash
+npx wrangler pages deploy . --project-name=port-light-page --branch=main
+```
+
+To auto-deploy on push instead, connect the GitHub repo to the Pages project in the Cloudflare dashboard (Build command: none, output directory: `/`).
 
 ## Page features
 
