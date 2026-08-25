@@ -1,1 +1,3 @@
-console.log('port-light page boot');
+import { initDemoGrid } from './demo-grid.js';
+
+initDemoGrid();
