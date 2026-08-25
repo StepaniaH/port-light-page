@@ -151,6 +151,11 @@ export function initDemoGrid(t = (key, params) => fallbackStr(key, params)) {
   updateCounts();
   render(initialQuery);
 
+  document.addEventListener('pl:lang', () => {
+    updateCounts();
+    render(search?.value.trim() || initialQuery);
+  });
+
   if (reduced) return;
 
   // --- story loop ---------------------------------------------------------
