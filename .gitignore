@@ -3,3 +3,5 @@ probe.html
 frame390.html
 f390.html
 .DS_Store
+node_modules/
+.wrangler/
