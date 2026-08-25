@@ -1,4 +1,6 @@
-// Port-Light landing page — live GitHub stars / Docker Hub pulls with baked fallbacks.
+// Port-Light landing page — live GitHub stars; Docker Hub pulls are baked
+// (hub.docker.com sends no CORS headers, so browsers can't fetch it directly;
+// a Cloudflare Pages Function could proxy it later).
 
 const fmtK = (n) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, '')}K` : `${n}`);
 
@@ -31,10 +33,5 @@ export function initStats({ starsFallback = 47, pullsFallback = 4519 } = {}) {
   fetch('https://api.github.com/repos/StepaniaH/port-light')
     .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
     .then((d) => { if (typeof d.stargazers_count === 'number') countUp(stars, d.stargazers_count); })
-    .catch(() => {});
-
-  fetch('https://hub.docker.com/v2/repositories/stepaniah/port-light')
-    .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-    .then((d) => { if (typeof d.pull_count === 'number') countUp(pulls, d.pull_count); })
     .catch(() => {});
 }
