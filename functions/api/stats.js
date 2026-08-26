@@ -47,14 +47,36 @@ async function metric(url, options, pick) {
   return { v: null, fresh: false, err };
 }
 
+// Hub API rate limits anonymous requests per IP — and Cloudflare's shared
+// egress IPs are almost always exhausted (429). A Docker Hub access token
+// (read-only, account settings → security) moves the quota to the account.
+async function hubJwt(env = {}) {
+  if (!env.DOCKER_HUB_USERNAME || !env.DOCKER_HUB_TOKEN) return null;
+  try {
+    const r = await fetch('https://hub.docker.com/v2/users/login', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ username: env.DOCKER_HUB_USERNAME, password: env.DOCKER_HUB_TOKEN }),
+      signal: AbortSignal.timeout(3000),
+    });
+    if (!r.ok) return null;
+    const { token } = await r.json();
+    return typeof token === 'string' && token ? token : null;
+  } catch {
+    return null;
+  }
+}
+
 export async function onRequest({ env = {} } = {}) {
   const ghHeaders = {
     'user-agent': 'port-light-page',
     accept: 'application/vnd.github+json',
     ...(env.GITHUB_TOKEN ? { authorization: `Bearer ${env.GITHUB_TOKEN}` } : {}),
   };
+  const jwt = await hubJwt(env);
+  const dockerOptions = jwt ? { headers: { authorization: `Bearer ${jwt}` } } : {};
   const [pulls, stars, version] = await Promise.all([
-    metric(DOCKER_UPSTREAM, {}, (d) => (Number.isFinite(d.pull_count) && d.pull_count >= 0 ? d.pull_count : null)),
+    metric(DOCKER_UPSTREAM, dockerOptions, (d) => (Number.isFinite(d.pull_count) && d.pull_count >= 0 ? d.pull_count : null)),
     metric(GITHUB_REPO, { headers: ghHeaders }, (d) => (Number.isFinite(d.stargazers_count) && d.stargazers_count >= 0 ? d.stargazers_count : null)),
     metric(GITHUB_RELEASE, { headers: ghHeaders }, (d) => (/^v\d+\.\d+\.\d+/.test(d.tag_name ?? '') ? d.tag_name : null)),
   ]);
