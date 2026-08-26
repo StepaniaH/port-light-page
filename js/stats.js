@@ -11,7 +11,9 @@ export function initStats({ starsFallback = 47, pullsFallback = 4745 } = {}) {
   const pulls = document.getElementById('stat-pulls');
   if (!stars || !pulls) return;
   stars.textContent = fmtK(starsFallback);
+  stars.dataset.value = String(starsFallback);
   pulls.textContent = fmtK(pullsFallback);
+  pulls.dataset.value = String(pullsFallback);
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const countUp = (el, target) => {
