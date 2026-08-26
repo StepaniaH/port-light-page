@@ -56,7 +56,9 @@ export function applyLang(lang) {
     btn.textContent = meta ? meta.endonym : 'English';
   }
   for (const b of document.querySelectorAll('#lang-menu button')) {
-    b.classList.toggle('active', b.dataset.lang === lang);
+    const active = b.dataset.lang === lang;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-selected', String(active));
   }
   for (const el of document.querySelectorAll('[data-i18n]')) {
     const v = t(el.dataset.i18n, {}, lang);

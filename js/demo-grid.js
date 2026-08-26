@@ -97,6 +97,7 @@ export function initDemoGrid(t) {
   function cellEl({ port, name, cls }) {
     const b = document.createElement('button');
     b.className = `cell ${cls}`;
+    b.tabIndex = -1;
     b.dataset.port = port;
     const num = document.createElement('span');
     num.className = 'num';

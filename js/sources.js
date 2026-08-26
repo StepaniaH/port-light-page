@@ -12,7 +12,6 @@ export function initSources() {
     for (const c of cards) {
       const on = c.dataset.source === active;
       c.setAttribute('aria-expanded', String(on));
-      c.setAttribute('aria-pressed', String(on));
     }
     if (active) grid.dataset.focus = active;
     else delete grid.dataset.focus;

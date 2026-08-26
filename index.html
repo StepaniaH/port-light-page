@@ -26,32 +26,14 @@
   <meta name="twitter:description" content="Know which port is taken, by what, and which are free. A traffic-light occupancy grid for your homelab.">
   <meta name="twitter:image" content="https://port-light-page.pages.dev/assets/og.png">
   <meta name="theme-color" content="#0c1016">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/main.css">
-  <script>document.documentElement.classList.add('js');</script>
-  <script>
-    (function () {
-      var langs = ['en', 'zh-CN', 'zh-TW', 'ja', 'fr', 'de', 'es'];
-      var saved = null;
-      try { saved = localStorage.getItem('pl-lang'); } catch (e) {}
-      var lang = saved && langs.indexOf(saved) >= 0 ? saved : null;
-      if (!lang && Array.isArray(navigator.languages)) {
-        for (var i = 0; i < navigator.languages.length && !lang; i++) {
-          if (langs.indexOf(navigator.languages[i]) >= 0) lang = navigator.languages[i];
-        }
-        for (var j = 0; j < navigator.languages.length && !lang; j++) {
-          if (navigator.languages[j].indexOf('zh') === 0) lang = 'zh-CN';
-        }
-      }
-      if (lang && lang !== 'en') {
-        document.documentElement.classList.add('lang-pending');
-        setTimeout(function () { document.documentElement.classList.remove('lang-pending'); }, 1500);
-      }
-    })();
-  </script>
+  <script src="js/boot.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -114,6 +96,7 @@
           <p class="lead" data-i18n="hero.sub">Port-Light merges your host's listen tables, Docker, and Compose files into a single traffic-light grid, so you can tell taken ports from free ones without reaching for ss.</p>
           <div class="hero-cta">
             <button class="btn primary" data-copy="docker pull stepaniah/port-light">docker pull stepaniah/port-light</button>
+            <a class="btn" href="https://github.com/StepaniaH/port-light" target="_blank" rel="noopener" data-i18n="hero.cta.github">View on GitHub</a>
           </div>
           <div class="hero-stats">
             <span class="stat-pill"><b id="stat-pulls">4.7K</b>&nbsp;<span data-i18n="stats.pulls">Docker pulls</span></span>
@@ -129,8 +112,55 @@
             <div class="demo-head">
               <input id="demo-search" type="text" inputmode="numeric" autocomplete="off" placeholder="Try 3000…" data-i18n-attr="placeholder:demo.search;aria-label:demo.search.aria" aria-label="Search ports">
             </div>
-            <p id="demo-counts" class="demo-counts">45 in use · 4 configured</p>
-            <div id="demo-grid" class="demo-grid"></div>
+            <p id="demo-counts" class="demo-counts">41 in use · 5 configured</p>
+            <div id="demo-grid" class="demo-grid">
+            <span class="cell used" data-port="22"><span class="num">22</span><span class="lbl">sshd</span></span>
+            <span class="cell used" data-port="53"><span class="num">53</span><span class="lbl">adguardhome</span></span>
+            <span class="cell used" data-port="80"><span class="num">80</span><span class="lbl">caddy</span></span>
+            <span class="cell used" data-port="111"><span class="num">111</span><span class="lbl">rpcbind</span></span>
+            <span class="cell used" data-port="443"><span class="num">443</span><span class="lbl">caddy</span></span>
+            <span class="cell used" data-port="1900"><span class="num">1900</span><span class="lbl">plex</span></span>
+            <span class="cell used" data-port="3000"><span class="num">3000</span><span class="lbl">grafana</span></span>
+            <span class="cell used" data-port="3001"><span class="num">3001</span><span class="lbl">uptime-kuma</span></span>
+            <span class="cell used" data-port="3002"><span class="num">3002</span><span class="lbl">jellystat</span></span>
+            <span class="cell used" data-port="3003"><span class="num">3003</span><span class="lbl">logto</span></span>
+            <span class="cell used" data-port="3004"><span class="num">3004</span><span class="lbl">logto</span></span>
+            <span class="cell used" data-port="3020"><span class="num">3020</span><span class="lbl">gitea</span></span>
+            <span class="cell used" data-port="3030"><span class="num">3030</span><span class="lbl">homepage</span></span>
+            <span class="cell used" data-port="3210"><span class="num">3210</span><span class="lbl">lobe-server</span></span>
+            <span class="cell configured" data-port="3306"><span class="num">3306</span><span class="lbl">mysql</span></span>
+            <span class="cell used" data-port="4533"><span class="num">4533</span><span class="lbl">navidrome</span></span>
+            <span class="cell used" data-port="5003"><span class="num">5003</span><span class="lbl">dify-plugin</span></span>
+            <span class="cell used" data-port="5230"><span class="num">5230</span><span class="lbl">memos</span></span>
+            <span class="cell configured" data-port="5432"><span class="num">5432</span><span class="lbl">postgres</span></span>
+            <span class="cell used" data-port="5800"><span class="num">5800</span><span class="lbl">makemkv</span></span>
+            <span class="cell configured" data-port="6379"><span class="num">6379</span><span class="lbl">redis</span></span>
+            <span class="cell used" data-port="6767"><span class="num">6767</span><span class="lbl">bazarr</span></span>
+            <span class="cell used" data-port="6881"><span class="num">6881</span><span class="lbl">qbittorrent</span></span>
+            <span class="cell used" data-port="6969"><span class="num">6969</span><span class="lbl">whisparr</span></span>
+            <span class="cell used" data-port="7878"><span class="num">7878</span><span class="lbl">radarr</span></span>
+            <span class="cell used" data-port="8015"><span class="num">8015</span><span class="lbl">mcp-fs-web2org</span></span>
+            <span class="cell used" data-port="8080"><span class="num">8080</span><span class="lbl">qbittorrent</span></span>
+            <span class="cell used" data-port="8081"><span class="num">8081</span><span class="lbl">adguardhome</span></span>
+            <span class="cell used" data-port="8082"><span class="num">8082</span><span class="lbl">calibre-web</span></span>
+            <span class="cell used" data-port="8083"><span class="num">8083</span><span class="lbl">freshrss</span></span>
+            <span class="cell used" data-port="8096"><span class="num">8096</span><span class="lbl">jellyfin</span></span>
+            <span class="cell used" data-port="8111"><span class="num">8111</span><span class="lbl">dify-nginx</span></span>
+            <span class="cell used" data-port="8123"><span class="num">8123</span><span class="lbl">python3</span></span>
+            <span class="cell used" data-port="8384"><span class="num">8384</span><span class="lbl">syncthing</span></span>
+            <span class="cell used" data-port="8412"><span class="num">8412</span><span class="lbl">gatus</span></span>
+            <span class="cell used" data-port="8443"><span class="num">8443</span><span class="lbl">dify-nginx</span></span>
+            <span class="cell configured" data-port="8888"><span class="num">8888</span><span class="lbl">my_ml_notebook</span></span>
+            <span class="cell configured" data-port="8920"><span class="num">8920</span><span class="lbl">emby</span></span>
+            <span class="cell used" data-port="8989"><span class="num">8989</span><span class="lbl">sonarr</span></span>
+            <span class="cell used" data-port="9000"><span class="num">9000</span><span class="lbl">portainer</span></span>
+            <span class="cell used" data-port="9001"><span class="num">9001</span><span class="lbl">lobe-minio</span></span>
+            <span class="cell used" data-port="9080"><span class="num">9080</span><span class="lbl">health-export</span></span>
+            <span class="cell used" data-port="9090"><span class="num">9090</span><span class="lbl">prometheus</span></span>
+            <span class="cell used" data-port="9100"><span class="num">9100</span><span class="lbl">node-exporter</span></span>
+            <span class="cell used" data-port="9208"><span class="num">9208</span><span class="lbl">mdc</span></span>
+            <span class="cell used" data-port="9443"><span class="num">9443</span><span class="lbl">portainer</span></span>
+          </div>
             <p class="demo-note" data-i18n="demo.note">live demo · simulated data</p>
             <div id="demo-toast" class="demo-toast" hidden></div>
           </div>
@@ -146,7 +176,7 @@
           <p class="lead" data-i18n="how.lead">Nothing to install elsewhere, nothing leaves the machine. Port-Light reads what is already true on your host and merges it into one view.</p>
         </div>
         <div class="sources" data-reveal>
-          <div class="source-card" role="button" tabindex="0" aria-expanded="false" aria-pressed="false" data-source="listen">
+          <div class="source-card" role="button" tabindex="0" aria-expanded="false" data-source="listen">
             <h3 data-i18n="how.s1.t">Host listen tables · /proc, ss</h3>
             <p data-i18n="how.s1.b">TCP/UDP ports actually bound right now.</p>
             <div class="source-more">
@@ -157,7 +187,7 @@
             </div>
             <span class="source-x" aria-hidden="true">+</span>
           </div>
-          <div class="source-card" role="button" tabindex="0" aria-expanded="false" aria-pressed="false" data-source="docker">
+          <div class="source-card" role="button" tabindex="0" aria-expanded="false" data-source="docker">
             <h3 data-i18n="how.s2.t">Docker API</h3>
             <p data-i18n="how.s2.b">Container names, status, images, published mappings.</p>
             <div class="source-more">
@@ -168,7 +198,7 @@
             </div>
             <span class="source-x" aria-hidden="true">+</span>
           </div>
-          <div class="source-card" role="button" tabindex="0" aria-expanded="false" aria-pressed="false" data-source="compose">
+          <div class="source-card" role="button" tabindex="0" aria-expanded="false" data-source="compose">
             <h3 data-i18n="how.s3.t">Compose files</h3>
             <p data-i18n="how.s3.b">Ports that are declared — even when the stack is stopped.</p>
             <div class="source-more">
@@ -340,7 +370,7 @@ curl -s "$PORT_LIGHT_URL/api/ports/suggest?count=2&amp;reserve=true&amp;ttl=3600
 <span class="out">{
   "ports": [8081, 8082],
   "reserved": [8081, 8082],
-  "expires_at": "2026-08-25T13:04:11Z"
+  "expires_at": "<span id="agents-exp">2026-08-25T13:04:11Z</span>"
 }</span></pre>
         </div>
         <div class="agents-echo" data-reveal>

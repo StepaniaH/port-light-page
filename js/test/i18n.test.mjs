@@ -70,9 +70,9 @@ test('every key used by the page exists in all dictionaries', async () => {
 
 test('inline head script language list matches LANGS', async () => {
   const { readFile } = await import('node:fs/promises');
-  const html = await readFile(new URL('../../index.html', import.meta.url), 'utf8');
-  const m = html.match(/var langs = \[([^\]]*)\]/);
-  assert.ok(m, 'inline langs list missing from index.html head script');
+  const src = await readFile(new URL('../boot.js', import.meta.url), 'utf8');
+  const m = src.match(/var langs = \[([^\]]*)\]/);
+  assert.ok(m, 'inline langs list missing from js/boot.js');
   const inline = [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]).sort();
   assert.deepEqual(inline, LANGS.map((l) => l.code).sort());
 });

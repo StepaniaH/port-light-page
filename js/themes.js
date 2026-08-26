@@ -3,6 +3,7 @@
 // gallery follow the UI language.
 
 import { t } from './i18n.js';
+import { moveFocus } from './menu-nav.js';
 
 export const THEMES = [
   'dark', 'light', 'gruvbox', 'gruvbox-light', 'catppuccin', 'catppuccin-latte',
@@ -45,7 +46,9 @@ export function applyTheme(id) {
     card.classList.toggle('active', card.dataset.themeCard === id);
   }
   for (const btn of document.querySelectorAll('#theme-menu button')) {
-    btn.classList.toggle('active', btn.dataset.themeId === id);
+    const active = btn.dataset.themeId === id;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-selected', String(active));
   }
 }
 
@@ -58,34 +61,37 @@ export function initThemes(urlTheme = null) {
   const menu = document.getElementById('theme-menu');
   const btn = document.getElementById('nav-theme-btn');
   if (menu && btn) {
+    const close = (refocus = false) => {
+      if (menu.hidden) return;
+      menu.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      if (refocus) btn.focus();
+    };
+    const open = () => {
+      menu.hidden = false;
+      btn.setAttribute('aria-expanded', 'true');
+      (menu.querySelector('button.active') ?? menu.querySelector('button'))?.focus();
+    };
     for (const id of THEMES) {
       const b = document.createElement('button');
       b.type = 'button';
       b.dataset.themeId = id;
       b.textContent = themeLabel(id);
-      if (id === saved) b.classList.add('active');
+      b.classList.toggle('active', id === saved);
+      b.setAttribute('aria-selected', String(id === saved));
       b.addEventListener('click', () => {
         applyTheme(id);
-        menu.hidden = true;
-        btn.setAttribute('aria-expanded', 'false');
+        close(true);
       });
       menu.append(b);
     }
-    btn.addEventListener('click', () => {
-      menu.hidden = !menu.hidden;
-      btn.setAttribute('aria-expanded', String(!menu.hidden));
-    });
+    btn.addEventListener('click', () => (menu.hidden ? open() : close()));
+    menu.addEventListener('keydown', (e) => moveFocus(e, menu));
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !menu.hidden) {
-        menu.hidden = true;
-        btn.setAttribute('aria-expanded', 'false');
-      }
+      if (e.key === 'Escape' && !menu.hidden) close(true);
     });
     document.addEventListener('click', (e) => {
-      if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) {
-        menu.hidden = true;
-        btn.setAttribute('aria-expanded', 'false');
-      }
+      if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) close();
     });
   }
 

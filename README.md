@@ -50,7 +50,14 @@ To auto-deploy on push instead, connect the GitHub repo to the Pages project in 
   --hide-scrollbars --window-size=1200,630 \
   --screenshot=assets/og.png "file://$PWD/assets/og-card.html"
 ```
-- Scroll reveals and copy buttons; all motion respects `prefers-reduced-motion`, and the content stays readable with JavaScript disabled.
+- Favicon fallbacks: `assets/favicon-32.png` and `assets/apple-touch-icon.png` (180×180, opaque) are screenshots of `assets/favicon.svg` over a `#0c1016` background:
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu \
+  --window-size=180,180 --screenshot=assets/apple-touch-icon.png "file://$PWD/assets/favicon.svg"
+```
+- Scroll reveals and copy buttons; all motion respects `prefers-reduced-motion`, and the page stays readable with JavaScript disabled: the hero grid is baked into `index.html` (46 static cells + counts line) and replaced by the live engine on boot. A test keeps the baked markup in sync with `PORTS`.
+- Demo cells are removed from the tab order (`tabindex="-1"`) so keyboard users aren't forced through ~46 stops; the language/theme menus support arrow-key navigation, and a minimal `404.html` keeps unknown URLs from soft-404ing into the homepage.
 
 URL parameters for sharing a state: `?lang=zh-CN`, `?theme=gruvbox`, `?q=3000` (prefills the demo search).
 
@@ -59,7 +66,7 @@ URL parameters for sharing a state: `?lang=zh-CN`, `?theme=gruvbox`, `?q=3000` (
 - `js/locales/<code>.js` — one ES module per language, flat dotted keys. `en.js` is canonical: every other locale must have the exact same key set (tests enforce this, plus non-empty strings and `{param}` placeholder parity).
 - `js/i18n.js` — `LANGS` (code + endonym), `DICTS`, the `t(key, params)` lookup with en fallback, and `applyLang()`. First visit picks the browser language (`navigator.languages`, `zh*` → `zh-CN`); the choice persists in `localStorage` (`pl-lang`). `?lang=` overrides.
 - Markup hooks: `data-i18n="key"` (textContent), `data-i18n-html="key"` (innerHTML, only for the limits body link), `data-i18n-attr="attr:key;attr2:key2"` (attributes — placeholders, `title`, `aria-label`, meta content). `<title>` and the meta description localize client-side; og:/twitter: tags stay English because social scrapers don't run JS, and the og card image is English for the same reason.
-- JS-side strings go through the `t` passed to `initDemoGrid`; theme display names live under `theme.*` keys; the language list in the inline head script (first-paint flash guard) is kept in sync with `LANGS` by a test.
+- JS-side strings go through the `t` passed to `initDemoGrid`; theme display names live under `theme.*` keys; the pre-paint language list in `js/boot.js` (first-paint flash guard) is kept in sync with `LANGS` by a test.
 - `applyLang()` dispatches `pl:lang` after re-translating; modules that render their own text (demo grid, theme labels, feature rail aria-labels) listen for it.
 
 **Add a language** (e.g. `pt-BR`):
@@ -75,11 +82,15 @@ URL parameters for sharing a state: `?lang=zh-CN`, `?theme=gruvbox`, `?q=3000` (
 
 ```
 index.html        all sections and copy, with data-i18n hooks
+404.html          minimal standalone 404 page (keeps unknown URLs from serving the homepage with 200)
+sitemap.xml       single-URL sitemap
 css/tokens.css    design tokens and the 15 palettes
 css/base.css      reset, typography, buttons, code blocks
 css/main.css      layout and section styles
+js/boot.js        pre-paint guards (js class + non-English flash guard), classic script so CSP needs no 'unsafe-inline'
 js/main.js        boot
 js/i18n.js        i18n engine: language metadata, t(), applyLang()
+js/menu-nav.js    shared arrow-key navigation for the language/theme menus
 js/locales/       one dictionary file per language
 js/lang.js        custom language dropdown
 js/demo-grid.js   simulated grid engine
@@ -89,7 +100,7 @@ js/themes.js      palette switcher and gallery
 js/stats.js       live stars, pulls and version (via /api/stats)
 js/reveal.js      scroll reveals and copy buttons
 functions/        Pages Function proxying Docker Hub pulls, GitHub stars and the latest release
-_headers          security response headers (CSP, nosniff, frame/referrer policies)
+_headers          security response headers (CSP, nosniff, frame/referrer policies) plus cache rules: HTML leads, css/js/assets cached a day — Cloudflare Pages purges its edge cache on every deploy
 js/test/          unit tests (node --test, no npm)
 ```
 
