@@ -24,7 +24,11 @@ Hosted on Cloudflare Pages at https://port-light-page.pages.dev. Deployments are
 npx wrangler pages deploy . --project-name=port-light-page --branch=main
 ```
 
-Wrangler picks up `functions/` automatically; `/api/stats` is a Pages Function that proxies the Docker Hub pull count (Docker Hub sends no CORS headers, so the browser cannot query it directly).
+Wrangler picks up `functions/` automatically; `/api/stats` is a Pages Function that proxies the Docker Hub pull count, GitHub stars and the latest release (Docker Hub sends no CORS headers, and keeping GitHub off the client avoids its per-IP rate limit). Optional but recommended — raise the GitHub upstream limit with a fine-grained read-only token:
+
+```bash
+npx wrangler pages secret put GITHUB_TOKEN --project-name=port-light-page
+```
 
 To auto-deploy on push instead, connect the GitHub repo to the Pages project in the Cloudflare dashboard (Build command: none, output directory: `/`).
 

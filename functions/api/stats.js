@@ -9,22 +9,28 @@ const GITHUB_REPO = 'https://api.github.com/repos/StepaniaH/port-light';
 const GITHUB_RELEASE = 'https://api.github.com/repos/StepaniaH/port-light/releases/latest';
 const FALLBACK = { stars: 47, pulls: 4745, version: 'v0.7.2' };
 
-function respond(body) {
+function respond(body, upstreamOk) {
   return new Response(JSON.stringify(body), {
     headers: {
       'content-type': 'application/json',
-      'cache-control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+      // Pin successful reads at the edge for an hour; if every upstream
+      // failed (transient or rate-limited), cache only briefly so the next
+      // request retries instead of serving stale fallbacks.
+      'cache-control': upstreamOk
+        ? 'public, s-maxage=3600, stale-while-revalidate=86400'
+        : 'public, max-age=60',
     },
   });
 }
 
 export async function onRequest({ env = {} } = {}) {
   const out = { ...FALLBACK };
+  let ok = 0;
   try {
     const r = await fetch(DOCKER_UPSTREAM, { cf: { cacheTtl: 3600, cacheEverything: true } });
     if (!r.ok) throw new Error(`upstream ${r.status}`);
     const pulls = Number((await r.json()).pull_count);
-    if (Number.isFinite(pulls) && pulls >= 0) out.pulls = pulls;
+    if (Number.isFinite(pulls) && pulls >= 0) { out.pulls = pulls; ok++; }
   } catch { /* keep fallback pulls */ }
   const ghHeaders = {
     'user-agent': 'port-light-page',
@@ -38,7 +44,7 @@ export async function onRequest({ env = {} } = {}) {
     });
     if (!r.ok) throw new Error(`upstream ${r.status}`);
     const stars = Number((await r.json()).stargazers_count);
-    if (Number.isFinite(stars) && stars >= 0) out.stars = stars;
+    if (Number.isFinite(stars) && stars >= 0) { out.stars = stars; ok++; }
   } catch { /* keep fallback stars */ }
   try {
     const r = await fetch(GITHUB_RELEASE, {
@@ -47,7 +53,7 @@ export async function onRequest({ env = {} } = {}) {
     });
     if (!r.ok) throw new Error(`upstream ${r.status}`);
     const tag = (await r.json()).tag_name;
-    if (typeof tag === 'string' && /^v\d+\.\d+\.\d+/.test(tag)) out.version = tag;
+    if (typeof tag === 'string' && /^v\d+\.\d+\.\d+/.test(tag)) { out.version = tag; ok++; }
   } catch { /* keep fallback version */ }
-  return respond(out);
+  return respond(out, ok > 0);
 }
