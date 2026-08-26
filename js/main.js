@@ -4,6 +4,8 @@ import { initThemes } from './themes.js';
 import { initLangMenu } from './lang.js';
 import { initStats } from './stats.js';
 import { initReveal, initCopyButtons } from './reveal.js';
+import { initSources } from './sources.js';
+import { initFeatures } from './features.js';
 
 const urlLang = new URLSearchParams(location.search).get('lang');
 applyLang(LANGS.some((l) => l.code === urlLang) ? urlLang : getLang());
@@ -14,3 +16,5 @@ initLangMenu();
 initStats({ starsFallback: 47, pullsFallback: 4745, versionFallback: 'v0.7.2' });
 initReveal();
 initCopyButtons();
+initSources();
+initFeatures();

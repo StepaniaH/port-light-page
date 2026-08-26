@@ -19,6 +19,9 @@ export default {
   'how.kicker': 'Cómo funciona',
   'how.title': 'Tres fuentes, una cuadrícula.',
   'how.lead': 'Nada que instalar en otras máquinas, nada sale del equipo. Port-Light lee lo que ya es cierto en tu host y lo reúne en una sola vista.',
+  'how.s1.d': 'Lee las tablas de /proc/net directamente, con ss como respaldo; los nombres de proceso salen de /host/proc cuando ese montaje existe.',
+  'how.s2.d': 'Consulta docker.sock en solo lectura: nombre, estado, imagen y puertos publicados de cada contenedor. Los contenedores en red host se emparejan mediante inodos de socket de /proc.',
+  'how.s3.d': 'Analiza COMPOSE_SCAN_DIR en busca de compose.y*ml / docker-compose.y*ml, hasta 4 niveles de profundidad. Los .env vecinos se leen en local y nunca se suben.',
   'how.s1.t': 'Tablas de escucha · /proc, ss',
   'how.s1.b': 'Los puertos TCP/UDP realmente vinculados ahora mismo.',
   'how.s2.t': 'API de Docker',
@@ -63,5 +66,6 @@ export default {
   'quickstart.note': 'Imágenes para linux/amd64 y arm64, también en GHCR. Prefiere etiquetas de versión antes que latest.',
   'limits.title': 'Un mapa de ocupación de puertos — no un gestor de contenedores.',
   'limits.body': 'Port-Light no arranca ni detiene contenedores, no mira logs ni sustituye a Portainer. Es una página de solo lectura para tu LAN — detrás de Basic Auth o de un proxy inverso, y fuera de internet público. La <a href="https://github.com/StepaniaH/port-light/blob/main/SECURITY.md" target="_blank" rel="noopener">lista de verificación de seguridad</a> reúne las recomendaciones.',
+  'features.back': '← Todas las funciones',
   'copy': 'copiar',
 };

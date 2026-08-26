@@ -93,17 +93,38 @@
           <p class="lead" data-i18n="how.lead">Nothing to install elsewhere, nothing leaves the machine. Port-Light reads what is already true on your host and merges it into one view.</p>
         </div>
         <div class="sources" data-reveal>
-          <div class="source-card">
+          <div class="source-card" role="button" tabindex="0" aria-expanded="false" aria-pressed="false" data-source="listen">
             <h3 data-i18n="how.s1.t">Host listen tables · /proc, ss</h3>
             <p data-i18n="how.s1.b">TCP/UDP ports actually bound right now.</p>
+            <div class="source-more">
+              <div>
+                <p class="source-mono">/proc/net/tcp · tcp6 · udp → ss fallback</p>
+                <p class="source-desc" data-i18n="how.s1.d">Reads the /proc/net tables directly, with ss as a fallback; process names come from /host/proc when that mount is present.</p>
+              </div>
+            </div>
+            <span class="source-x" aria-hidden="true">+</span>
           </div>
-          <div class="source-card">
+          <div class="source-card" role="button" tabindex="0" aria-expanded="false" aria-pressed="false" data-source="docker">
             <h3 data-i18n="how.s2.t">Docker API</h3>
             <p data-i18n="how.s2.b">Container names, status, images, published mappings.</p>
+            <div class="source-more">
+              <div>
+                <p class="source-mono">docker.sock (ro) · /proc/&lt;pid&gt;/fd</p>
+                <p class="source-desc" data-i18n="how.s2.d">Reads docker.sock (read-only mount): name, status, image and published ports per container. Host-network containers are matched via /proc socket inodes.</p>
+              </div>
+            </div>
+            <span class="source-x" aria-hidden="true">+</span>
           </div>
-          <div class="source-card">
+          <div class="source-card" role="button" tabindex="0" aria-expanded="false" aria-pressed="false" data-source="compose">
             <h3 data-i18n="how.s3.t">Compose files</h3>
             <p data-i18n="how.s3.b">Ports that are declared — even when the stack is stopped.</p>
+            <div class="source-more">
+              <div>
+                <p class="source-mono">COMPOSE_SCAN_DIR · depth 4 · ≤400 files</p>
+                <p class="source-desc" data-i18n="how.s3.d">Scans COMPOSE_SCAN_DIR for compose.y*ml / docker-compose.y*ml, up to 4 levels deep. Sibling .env files are read locally, never uploaded.</p>
+              </div>
+            </div>
+            <span class="source-x" aria-hidden="true">+</span>
           </div>
         </div>
         <div class="merge-arrow" aria-hidden="true" data-reveal>↓</div>
@@ -128,48 +149,125 @@
           <p class="kicker" data-i18n="features.kicker">Features</p>
           <h2 data-i18n="features.title">For hosts running more than a few stacks.</h2>
         </div>
-        <div class="feature-grid">
-          <div class="feature-card" data-reveal>
+        <div class="feature-grid" id="feature-grid">
+          <div class="feature-card" data-reveal data-feature="f1" role="button" tabindex="0" aria-expanded="false">
             <span class="ico" aria-hidden="true">🔍</span>
             <h3 data-i18n="f1.t">Search that suggests</h3>
             <p data-i18n="f1.b">Type a port number; if it's taken, nearby free ones light up.</p>
           </div>
-          <div class="feature-card" data-reveal>
+          <div class="feature-card" data-reveal data-feature="f2" role="button" tabindex="0" aria-expanded="false">
             <span class="ico" aria-hidden="true">⚠️</span>
             <h3 data-i18n="f2.t">Conflict radar</h3>
             <p data-i18n="f2.b">Two Compose projects claiming the same host port get flagged before they collide.</p>
           </div>
-          <div class="feature-card" data-reveal>
+          <div class="feature-card" data-reveal data-feature="f3" role="button" tabindex="0" aria-expanded="false">
             <span class="ico" aria-hidden="true">🖥️</span>
             <h3 data-i18n="f3.t">Multi-host, one screen</h3>
             <p data-i18n="f3.b">Pull occupancy maps from other Port-Light instances over LAN or Tailscale.</p>
           </div>
-          <div class="feature-card" data-reveal>
+          <div class="feature-card" data-reveal data-feature="f4" role="button" tabindex="0" aria-expanded="false">
             <span class="ico" aria-hidden="true">⚡</span>
             <h3 data-i18n="f4.t">Live updates</h3>
             <p data-i18n="f4.b">SSE pushes a refresh the moment occupancy changes; local history records each transition.</p>
           </div>
-          <div class="feature-card" data-reveal>
+          <div class="feature-card" data-reveal data-feature="f5" role="button" tabindex="0" aria-expanded="false">
             <span class="ico" aria-hidden="true">🪝</span>
             <h3 data-i18n="f5.t">Hooks &amp; metrics</h3>
             <p data-i18n="f5.b">Optional webhooks on new listeners and conflicts; Prometheus aggregates when you want them.</p>
           </div>
-          <div class="feature-card" data-reveal>
+          <div class="feature-card" data-reveal data-feature="f6" role="button" tabindex="0" aria-expanded="false">
             <span class="ico" aria-hidden="true">🤖</span>
             <h3 data-i18n="f6.t">Agent-friendly API</h3>
             <p data-i18n="f6.b">GET /api/ports/suggest returns a free port and can reserve it with an expiring lease.</p>
           </div>
-          <div class="feature-card" data-reveal>
+          <div class="feature-card" data-reveal data-feature="f7" role="button" tabindex="0" aria-expanded="false">
             <span class="ico" aria-hidden="true">🎨</span>
             <h3 data-i18n="f7.t">Speaks your theme</h3>
             <p data-i18n="f7.b">Fifteen palettes from Gruvbox to Kanagawa; four UI languages.</p>
           </div>
-          <div class="feature-card" data-reveal>
+          <div class="feature-card" data-reveal data-feature="f8" role="button" tabindex="0" aria-expanded="false">
             <span class="ico" aria-hidden="true">🔒</span>
             <h3 data-i18n="f8.t">Stays on your machine</h3>
             <p data-i18n="f8.b">No telemetry, no accounts, no cloud. Your port map never leaves the host.</p>
           </div>
         </div>
+
+        <div id="feature-detail" class="feature-detail" hidden>
+          <div class="fd-left">
+            <button id="fd-back" class="fd-back" type="button" data-i18n="features.back">← All features</button>
+            <div class="fd-card"></div>
+            <div class="fd-rail" role="tablist" aria-label="Features"></div>
+          </div>
+          <div class="fd-right">
+            <div class="fd-body"></div>
+            <div class="fd-demo"></div>
+          </div>
+        </div>
+
+        <template id="fdemo-f1">
+          <div class="fdemo fdemo-search">
+            <div class="fdemo-input"><span>3000</span><i class="fd-caret"></i></div>
+            <div class="fdemo-cells">
+              <span class="ecell u">2999</span>
+              <span class="ecell u">3000</span>
+              <span class="ecell f">3001</span>
+              <span class="ecell f">3002</span>
+              <span class="ecell f">3003</span>
+            </div>
+          </div>
+        </template>
+        <template id="fdemo-f2">
+          <div class="fdemo fdemo-conflict">
+            <div class="fdemo-chips"><span class="chip">authelia/compose.yml</span><span class="chip">vaultwarden/compose.yml</span></div>
+            <div class="fdemo-cells"><span class="ecell conflict">8081</span><span class="ecell u">8082</span><span class="ecell f">8083</span></div>
+          </div>
+        </template>
+        <template id="fdemo-f3">
+          <div class="fdemo fdemo-hosts">
+            <div class="fdemo-host"><span class="fdemo-label">nas.lan</span><span class="fdemo-mini"><i class="u"></i><i class="u"></i><i class="c"></i><i class="u"></i><i class="u"></i><i class="f"></i><i class="u"></i><i class="c"></i></span></div>
+            <div class="fdemo-host"><span class="fdemo-label">hetzner.app</span><span class="fdemo-mini"><i class="u"></i><i class="f"></i><i class="u"></i><i class="u"></i><i class="c"></i><i class="u"></i><i class="u"></i><i class="u"></i></span></div>
+          </div>
+        </template>
+        <template id="fdemo-f4">
+          <div class="fdemo fdemo-term">
+            <div class="fdemo-line dim">retry: 3000</div>
+            <div class="fdemo-line">event: refresh</div>
+            <div class="fdemo-line">data: {}</div>
+            <div class="fdemo-line"><i class="fd-caret"></i></div>
+          </div>
+        </template>
+        <template id="fdemo-f5">
+          <div class="fdemo fdemo-term">
+            <div class="fdemo-line">POST https://hooks.lan/port-light</div>
+            <div class="fdemo-line dim">{ "event": "new_listener", "port": 6379 }</div>
+            <div class="fdemo-line">port_light_ports{status="used"} 44</div>
+          </div>
+        </template>
+        <template id="fdemo-f6">
+          <div class="fdemo fdemo-term">
+            <div class="fdemo-line">GET /api/ports/suggest?count=1&amp;reserve=true</div>
+            <div class="fdemo-line dim">{ "ports": [8081], "expires_at": "+1h" }</div>
+          </div>
+        </template>
+        <template id="fdemo-f7">
+          <div class="fdemo fdemo-palettes">
+            <span class="fdemo-pal" style="background:#0c1016"></span>
+            <span class="fdemo-pal" style="background:linear-gradient(90deg,#282828 25%,#83a598 25% 50%,#d79921 50% 75%,#b8bb26 75%)"></span>
+            <span class="fdemo-pal" style="background:linear-gradient(90deg,#2e3440 25%,#88c0d0 25% 50%,#ebcb8b 50% 75%,#a3be8c 75%)"></span>
+            <span class="fdemo-pal" style="background:linear-gradient(90deg,#282a36 25%,#8be9fd 25% 50%,#f1fa8c 50% 75%,#50fa7b 75%)"></span>
+            <span class="fdemo-pal" style="background:linear-gradient(90deg,#1f1f28 25%,#7e9cd8 25% 50%,#e6c384 50% 75%,#98bb6c 75%)"></span>
+          </div>
+        </template>
+        <template id="fdemo-f8">
+          <div class="fdemo fdemo-local">
+            <div class="fdemo-chips">
+              <span class="chip off">telemetry</span>
+              <span class="chip off">cloud</span>
+              <span class="chip off">accounts</span>
+            </div>
+            <div class="fdemo-line mono-dim">bind: 127.0.0.1 — LAN only</div>
+          </div>
+        </template>
       </div>
     </section>
 

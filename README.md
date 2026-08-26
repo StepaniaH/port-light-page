@@ -31,6 +31,7 @@ To auto-deploy on push instead, connect the GitHub repo to the Pages project in 
 ## Page features
 
 - Simulated Port-Light grid in the hero: a beam sweep, a rotating demo loop (new listener, Compose conflict, search suggestions). Visitors can type a port number or click a card to copy it.
+- The "how it works" source cards toggle which cells the merge grid highlights; the features section opens an inline detail view with a micro-demo per feature and an icon rail for switching.
 - 15 theme palettes, ported from the app's `frontend/style.css`. The picker re-skins the whole site.
 - Seven UI languages (English, 简体中文, 繁體中文, 日本語, Français, Deutsch, Español) via a custom dropdown in the nav. Strings live in `js/locales/<code>.js` — one file per language; adding one means a new file plus a `LANGS` entry in `js/i18n.js`.
 - GitHub stars fetched live from the GitHub API; Docker pulls and the latest release version fetched live through `/api/stats` (a Pages Function proxying Docker Hub and the GitHub releases endpoint).

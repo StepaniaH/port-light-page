@@ -19,6 +19,9 @@ export default {
   'how.kicker': '工作原理',
   'how.title': '三个来源，一张网格',
   'how.lead': '别的机器不用装东西，数据也不出本机。Port-Light 只读取主机上已经存在的事实，合并成一个视图。',
+  'how.s1.d': '直接读取 /proc/net 表，必要时回退 ss；挂载了 /host/proc 时还能解析出进程名。',
+  'how.s2.d': '只读访问 docker.sock：每个容器的名字、状态、镜像与发布端口。host 网络容器通过 /proc socket inode 匹配。',
+  'how.s3.d': '扫描 COMPOSE_SCAN_DIR 下的 compose.y*ml / docker-compose.y*ml，最深 4 层。旁边的 .env 只在本地读取，不会上传。',
   'how.s1.t': '主机监听表 · /proc, ss',
   'how.s1.b': '当前真正绑定的 TCP/UDP 端口。',
   'how.s2.t': 'Docker API',
@@ -63,5 +66,6 @@ export default {
   'quickstart.note': '镜像覆盖 linux/amd64 与 arm64，另有 GHCR。重要机器请钉版本标签，别用 latest。',
   'limits.title': '端口占用图——不是容器管理器',
   'limits.body': 'Port-Light 不启停容器、不看日志、不替代 Portainer。它在局域网内提供一个只读页面——请放在 Basic Auth 或反向代理后面，不要暴露到公网。<a href="https://github.com/StepaniaH/port-light/blob/main/SECURITY.md" target="_blank" rel="noopener">安全加固清单</a>里整理了相关注意事项。',
+  'features.back': '← 全部功能',
   'copy': '复制',
 };

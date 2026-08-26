@@ -19,6 +19,9 @@ export default {
   'how.kicker': 'How it works',
   'how.title': 'Three sources, one grid.',
   'how.lead': 'Nothing to install elsewhere, nothing leaves the machine. Port-Light reads what is already true on your host and merges it into one view.',
+  'how.s1.d': 'Reads the /proc/net tables directly, with ss as a fallback; process names come from /host/proc when that mount is present.',
+  'how.s2.d': 'Reads docker.sock (read-only mount): name, status, image and published ports per container. Host-network containers are matched via /proc socket inodes.',
+  'how.s3.d': 'Scans COMPOSE_SCAN_DIR for compose.y*ml / docker-compose.y*ml, up to 4 levels deep. Sibling .env files are read locally, never uploaded.',
   'how.s1.t': 'Host listen tables · /proc, ss',
   'how.s1.b': 'TCP/UDP ports actually bound right now.',
   'how.s2.t': 'Docker API',
@@ -63,5 +66,6 @@ export default {
   'quickstart.note': 'Images for linux/amd64 and arm64, also on GHCR. Prefer version tags over latest.',
   'limits.title': 'A port occupancy map — not a container manager.',
   'limits.body': `Port-Light doesn't start or stop containers, tail logs, or replace Portainer. It serves one read-only page on your LAN — keep it behind Basic Auth or a reverse proxy and off the public internet. The <a href="https://github.com/StepaniaH/port-light/blob/main/SECURITY.md" target="_blank" rel="noopener">security checklist</a> collects the hardening notes.`,
+  'features.back': '← All features',
   'copy': 'copy',
 };

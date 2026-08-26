@@ -19,6 +19,9 @@ export default {
   'how.kicker': '運作原理',
   'how.title': '三個來源，一張網格',
   'how.lead': '其他機器不必安裝任何東西，資料也不出這台機器。Port-Light 只讀取主機上已經存在的事實，合併成一個檢視。',
+  'how.s1.d': '直接讀取 /proc/net 表，必要時回退 ss；掛載了 /host/proc 時還能解析出處理程序名稱。',
+  'how.s2.d': '唯讀存取 docker.sock：每個容器的名稱、狀態、映檔與發布連接埠。host 網路容器透過 /proc socket inode 匹配。',
+  'how.s3.d': '掃描 COMPOSE_SCAN_DIR 下的 compose.y*ml / docker-compose.y*ml，最深 4 層。旁邊的 .env 只在本機讀取，不會上傳。',
   'how.s1.t': '主機監聽表 · /proc, ss',
   'how.s1.b': '目前實際綁定的 TCP/UDP 連接埠。',
   'how.s2.t': 'Docker API',
@@ -63,5 +66,6 @@ export default {
   'quickstart.note': '映檔涵蓋 linux/amd64 與 arm64，另有 GHCR。重要機器請釘版本標籤，別用 latest。',
   'limits.title': '連接埠占用圖——不是容器管理器',
   'limits.body': 'Port-Light 不啟停容器、不看日誌、不替代 Portainer。它在區域網路內提供一個唯讀頁面——請放在 Basic Auth 或反向代理後面，不要暴露到公網。<a href="https://github.com/StepaniaH/port-light/blob/main/SECURITY.md" target="_blank" rel="noopener">安全強化清單</a>裡整理了相關注意事項。',
+  'features.back': '← 全部功能',
   'copy': '複製',
 };

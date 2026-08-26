@@ -19,6 +19,9 @@ export default {
   'how.kicker': '仕組み',
   'how.title': '3つのソースを1枚のグリッドに',
   'how.lead': '他ホストへのインストールは不要、データも端末の外に出ません。Port-Light はホスト上にある事実を読み取り、1つのビューに統合するだけです。',
+  'how.s1.d': '/proc/net テーブルを直接読み、必要なら ss にフォールバック。/host/proc がマウントされていればプロセス名も解決します。',
+  'how.s2.d': 'docker.sock に読み取り専用でアクセスし、コンテナごとの名前・状態・イメージ・公開ポートを取得。host ネットワークのコンテナは /proc の socket inode で照合します。',
+  'how.s3.d': 'COMPOSE_SCAN_DIR 配下の compose.y*ml / docker-compose.y*ml を最大4階層まで走査。隣接する .env はローカルでのみ読み、送信しません。',
   'how.s1.t': 'ホストのリッスンテーブル · /proc, ss',
   'how.s1.b': '現在实际にバインドされている TCP/UDP ポート。',
   'how.s2.t': 'Docker API',
@@ -63,5 +66,6 @@ export default {
   'quickstart.note': 'イメージは linux/amd64 と arm64 対応、GHCR にもあります。latest ではなくバージョンタグを推奨。',
   'limits.body': 'Port-Light はコンテナの起動・停止やログ表示はせず、Portainer の代替でもありません。LAN 内向けの読み取り専用ページなので、Basic Auth かリバースプロキシの背後に置き、公開インターネットには出さないでください。<a href="https://github.com/StepaniaH/port-light/blob/main/SECURITY.md" target="_blank" rel="noopener">セキュリティチェックリスト</a>に強化の要点をまとめてあります。',
   'limits.title': 'ポート占有マップ — コンテナ管理ツールではありません',
+  'features.back': '← 機能一覧',
   'copy': 'コピー',
 };

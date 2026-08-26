@@ -19,6 +19,9 @@ export default {
   'how.kicker': 'Fonctionnement',
   'how.title': 'Trois sources, une grille.',
   'how.lead': 'Rien à installer ailleurs, rien ne quitte la machine. Port-Light lit ce qui existe déjà sur votre hôte et le réunit en une seule vue.',
+  'how.s1.d': 'Lit directement les tables /proc/net, avec repli sur ss ; les noms de processus viennent de /host/proc quand ce montage existe.',
+  'how.s2.d': 'Interroge docker.sock en lecture seule : nom, état, image et ports publiés de chaque conteneur. Les conteneurs en réseau host sont retrouvés via les inodes de socket de /proc.',
+  'how.s3.d': 'Analyse COMPOSE_SCAN_DIR à la recherche de compose.y*ml / docker-compose.y*ml, jusqu’à 4 niveaux. Les .env voisins sont lus localement, jamais envoyés.',
   'how.s1.t': 'Tables d’écoute · /proc, ss',
   'how.s1.b': 'Les ports TCP/UDP réellement liés en ce moment.',
   'how.s2.t': 'API Docker',
@@ -63,5 +66,6 @@ export default {
   'quickstart.note': 'Images pour linux/amd64 et arm64, aussi sur GHCR. Préférez les tags de version à latest.',
   'limits.title': 'Une carte d’occupation des ports — pas un gestionnaire de conteneurs.',
   'limits.body': 'Port-Light ne démarre ni n’arrête de conteneurs, ne consulte pas les journaux et ne remplace pas Portainer. C’est une page en lecture seule pour votre LAN — derrière une Basic Auth ou un reverse proxy, et hors de l’internet public. La <a href="https://github.com/StepaniaH/port-light/blob/main/SECURITY.md" target="_blank" rel="noopener">checklist de sécurité</a> rassemble les recommandations.',
+  'features.back': '← Toutes les fonctions',
   'copy': 'copier',
 };
