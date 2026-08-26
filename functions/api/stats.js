@@ -9,10 +9,11 @@ const GITHUB_REPO = 'https://api.github.com/repos/StepaniaH/port-light';
 const GITHUB_RELEASE = 'https://api.github.com/repos/StepaniaH/port-light/releases/latest';
 const FALLBACK = { stars: 47, pulls: 4745, version: 'v0.7.2' };
 
-function respond(body, upstreamOk) {
+function respond(body, upstreamOk, okCount) {
   return new Response(JSON.stringify(body), {
     headers: {
       'content-type': 'application/json',
+      'x-stats-upstreams-ok': String(okCount),
       // Pin successful reads at the edge for an hour; if every upstream
       // failed (transient or rate-limited), cache only briefly so the next
       // request retries instead of serving stale fallbacks.
@@ -55,5 +56,5 @@ export async function onRequest({ env = {} } = {}) {
     const tag = (await r.json()).tag_name;
     if (typeof tag === 'string' && /^v\d+\.\d+\.\d+/.test(tag)) { out.version = tag; ok++; }
   } catch { /* keep fallback version */ }
-  return respond(out, ok > 0);
+  return respond(out, ok > 0, ok);
 }
