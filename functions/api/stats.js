@@ -22,6 +22,11 @@ async function metric(url, options, pick) {
         'user-agent': 'port-light-page/1.0 (+https://port-light-page.pages.dev)',
         ...options,
         signal: AbortSignal.timeout(3000),
+        // Route the subrequest through the colo-shared edge cache: one
+        // upstream 200 serves every Worker in the datacenter for an hour,
+        // which matters because Docker Hub 429s Cloudflare's shared egress
+        // IPs most of the time. Errors are cached only briefly.
+        cf: { cacheEverything: true, cacheTtlByStatus: { ok: 3600, errors: 30 } },
       });
       if (!r.ok) throw new Error(`${r.status}`);
       const v = pick(await r.json());
