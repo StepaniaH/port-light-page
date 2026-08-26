@@ -14,24 +14,32 @@ const TTL = 3600;
 async function metric(url, options, pick) {
   const cache = globalThis.caches?.default;
   const key = new Request(`https://stats-cache.internal/${url}`);
+  let err = 'unknown';
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      const r = await fetch(url, { ...options, signal: AbortSignal.timeout(3000) });
-      if (!r.ok) throw new Error(`upstream ${r.status}`);
+      const r = await fetch(url, {
+        accept: 'application/json',
+        'user-agent': 'port-light-page/1.0 (+https://port-light-page.pages.dev)',
+        ...options,
+        signal: AbortSignal.timeout(3000),
+      });
+      if (!r.ok) throw new Error(`${r.status}`);
       const v = pick(await r.json());
       if (v != null) {
         if (cache) await cache.put(key, Response.json({ v }));
-        return { v, fresh: true };
+        return { v, fresh: true, err: null };
       }
-    } catch {
+      err = 'parse';
+    } catch (e) {
+      err = `${e?.message ?? e}`.slice(0, 24);
       if (attempt === 0) await new Promise((res) => setTimeout(res, 400));
     }
   }
   if (cache) {
     const cached = await cache.match(key);
-    if (cached) return { v: (await cached.json()).v, fresh: false };
+    if (cached) return { v: (await cached.json()).v, fresh: false, err };
   }
-  return { v: null, fresh: false };
+  return { v: null, fresh: false, err };
 }
 
 export async function onRequest({ env = {} } = {}) {
@@ -51,12 +59,12 @@ export async function onRequest({ env = {} } = {}) {
     version: version.v ?? FALLBACK.version,
   };
   const fresh = [pulls, stars, version].filter((m) => m.fresh).length;
-  const names = [['pulls', pulls], ['stars', stars], ['version', version]]
-    .filter(([, m]) => m.fresh).map(([n]) => n).join(',') || 'none';
+  const detail = [['pulls', pulls], ['stars', stars], ['version', version]]
+    .map(([n, m]) => `${n}:${m.fresh ? 'ok' : `err(${m.err})`}`).join(' ');
   return new Response(JSON.stringify(out), {
     headers: {
       'content-type': 'application/json',
-      'x-stats-upstreams-fresh': `${fresh}/3 (${names})`,
+      'x-stats-upstreams-fresh': `${fresh}/3 ${detail}`,
       // Values are last-known-good, so a short browser cache is enough;
       // the hour-level caching happens per-metric inside this function.
       'cache-control': 'public, max-age=60',
