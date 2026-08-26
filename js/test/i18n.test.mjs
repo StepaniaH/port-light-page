@@ -56,11 +56,49 @@ test('every key used by the page exists in all dictionaries', async () => {
   const { readFile } = await import('node:fs/promises');
   const html = await readFile(new URL('../../index.html', import.meta.url), 'utf8');
   const used = new Set();
-  for (const m of html.matchAll(/data-i18n(?:-attr|-html)?="[^"]*?([a-z0-9.]+)"/g)) used.add(m[1]);
+  for (const m of html.matchAll(/data-i18n(?:-attr|-html)?="([^"]+)"/g)) {
+    for (const pair of m[1].split(';')) {
+      used.add(pair.includes(':') ? pair.slice(pair.indexOf(':') + 1) : pair);
+    }
+  }
   for (const key of DEMO_KEYS) used.add(key);
   for (const [code, strings] of Object.entries(await loadLocales())) {
     const missing = [...used].filter((k) => !(k in strings));
     assert.deepEqual(missing, [], `${code} missing: ${missing.join(', ')}`);
+  }
+});
+
+test('inline head script language list matches LANGS', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const html = await readFile(new URL('../../index.html', import.meta.url), 'utf8');
+  const m = html.match(/var langs = \[([^\]]*)\]/);
+  assert.ok(m, 'inline langs list missing from index.html head script');
+  const inline = [...m[1].matchAll(/'([^']+)'/g)].map((x) => x[1]).sort();
+  assert.deepEqual(inline, LANGS.map((l) => l.code).sort());
+});
+
+test('every t() key referenced in JS modules exists in en', async () => {
+  const { readdir, readFile } = await import('node:fs/promises');
+  const jsDir = new URL('../', import.meta.url);
+  const files = (await readdir(jsDir)).filter((f) => f.endsWith('.js'));
+  const en = (await loadLocales()).en;
+  const used = new Set();
+  for (const f of files) {
+    const src = await readFile(new URL(f, jsDir), 'utf8');
+    for (const m of src.matchAll(/\bt\('([a-z0-9.-]+)'/g)) used.add(m[1]);
+  }
+  const missing = [...used].filter((k) => !(k in en));
+  assert.deepEqual(missing, [], `JS references missing keys: ${missing.join(', ')}`);
+});
+
+test('every theme id has a theme.* label in all locales', async () => {
+  const { THEMES } = await import('../themes.js');
+  for (const [code, strings] of Object.entries(await loadLocales())) {
+    for (const id of THEMES) {
+      const v = strings[`theme.${id}`];
+      assert.equal(typeof v, 'string', `${code} missing theme.${id}`);
+      assert.notEqual(v.trim(), '', `${code}:theme.${id} is empty`);
+    }
   }
 });
 

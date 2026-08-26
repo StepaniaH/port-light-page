@@ -1,4 +1,8 @@
 // Port-Light landing page — theme switcher (15 palettes) + gallery.
+// Display names come from the locale files under theme.* so the menu and
+// gallery follow the UI language.
+
+import { t } from './i18n.js';
 
 export const THEMES = [
   'dark', 'light', 'gruvbox', 'gruvbox-light', 'catppuccin', 'catppuccin-latte',
@@ -6,23 +10,7 @@ export const THEMES = [
   'everforest', 'rose-pine', 'kanagawa',
 ];
 
-const LABEL = {
-  dark: 'Midnight (default)',
-  light: 'Daylight',
-  gruvbox: 'Gruvbox',
-  'gruvbox-light': 'Gruvbox Light',
-  catppuccin: 'Catppuccin',
-  'catppuccin-latte': 'Catppuccin Latte',
-  nord: 'Nord',
-  dracula: 'Dracula',
-  'tokyo-night': 'Tokyo Night',
-  'one-dark': 'One Dark',
-  solarized: 'Solarized',
-  'solarized-light': 'Solarized Light',
-  everforest: 'Everforest',
-  'rose-pine': 'Rosé Pine',
-  kanagawa: 'Kanagawa',
-};
+const themeLabel = (id) => t(`theme.${id}`) ?? id;
 
 // [bg, used, configured, free] — mirrors css/tokens.css
 const SWATCH = {
@@ -74,7 +62,7 @@ export function initThemes(urlTheme = null) {
       const b = document.createElement('button');
       b.type = 'button';
       b.dataset.themeId = id;
-      b.textContent = LABEL[id];
+      b.textContent = themeLabel(id);
       if (id === saved) b.classList.add('active');
       b.addEventListener('click', () => {
         applyTheme(id);
@@ -109,7 +97,7 @@ export function initThemes(urlTheme = null) {
       card.type = 'button';
       card.className = 'theme-card' + (id === saved ? ' active' : '');
       card.dataset.themeCard = id;
-      card.setAttribute('aria-label', LABEL[id]);
+      card.setAttribute('aria-label', themeLabel(id));
       const swatches = document.createElement('span');
       swatches.className = 'swatches';
       for (const c of [bg, used, configured, free]) {
@@ -119,10 +107,21 @@ export function initThemes(urlTheme = null) {
       }
       const name = document.createElement('span');
       name.className = 'tname';
-      name.textContent = LABEL[id];
+      name.textContent = themeLabel(id);
       card.append(swatches, name);
       card.addEventListener('click', () => applyTheme(id));
       gallery.append(card);
     }
   }
+
+  document.addEventListener('pl:lang', () => {
+    for (const b of menu?.querySelectorAll('button') ?? []) {
+      b.textContent = themeLabel(b.dataset.themeId);
+    }
+    for (const c of gallery?.querySelectorAll('.theme-card') ?? []) {
+      c.setAttribute('aria-label', themeLabel(c.dataset.themeCard));
+      const n = c.querySelector('.tname');
+      if (n) n.textContent = themeLabel(c.dataset.themeCard);
+    }
+  });
 }

@@ -3,17 +3,70 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Port-Light — a port occupancy map for homelabs</title>
-  <meta name="description" content="A local web dashboard that shows which host ports are taken, as a traffic-light grid. Merges listen tables, Docker and Compose files into one view.">
+  <title data-i18n="meta.title">Port-Light — a port occupancy map for homelabs</title>
+  <meta name="description" data-i18n-attr="content:meta.description" content="A local web dashboard that shows which host ports are taken, as a traffic-light grid. Merges listen tables, Docker and Compose files into one view.">
+  <link rel="canonical" href="https://port-light-page.pages.dev/">
   <meta property="og:title" content="Port-Light — a port occupancy map for homelabs">
   <meta property="og:description" content="Know which port is taken, by what, and which are free. A traffic-light occupancy grid for your homelab.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://port-light-page.pages.dev/">
+  <meta property="og:image" content="https://port-light-page.pages.dev/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Port-Light — a traffic-light port occupancy grid for homelabs">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:locale:alternate" content="zh_TW">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Port-Light — a port occupancy map for homelabs">
+  <meta name="twitter:description" content="Know which port is taken, by what, and which are free. A traffic-light occupancy grid for your homelab.">
+  <meta name="twitter:image" content="https://port-light-page.pages.dev/assets/og.png">
   <meta name="theme-color" content="#0c1016">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/main.css">
   <script>document.documentElement.classList.add('js');</script>
+  <script>
+    (function () {
+      var langs = ['en', 'zh-CN', 'zh-TW', 'ja', 'fr', 'de', 'es'];
+      var saved = null;
+      try { saved = localStorage.getItem('pl-lang'); } catch (e) {}
+      var lang = saved && langs.indexOf(saved) >= 0 ? saved : null;
+      if (!lang && Array.isArray(navigator.languages)) {
+        for (var i = 0; i < navigator.languages.length && !lang; i++) {
+          if (langs.indexOf(navigator.languages[i]) >= 0) lang = navigator.languages[i];
+        }
+        for (var j = 0; j < navigator.languages.length && !lang; j++) {
+          if (navigator.languages[j].indexOf('zh') === 0) lang = 'zh-CN';
+        }
+      }
+      if (lang && lang !== 'en') {
+        document.documentElement.classList.add('lang-pending');
+        setTimeout(function () { document.documentElement.classList.remove('lang-pending'); }, 1500);
+      }
+    })();
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Port-Light",
+    "operatingSystem": "Linux",
+    "applicationCategory": "DeveloperApplication",
+    "description": "A local web dashboard that shows which host ports are taken, as a traffic-light grid. Merges listen tables, Docker and Compose files into one view.",
+    "url": "https://port-light-page.pages.dev/",
+    "downloadUrl": "https://hub.docker.com/r/stepaniah/port-light",
+    "license": "https://opensource.org/licenses/MIT",
+    "author": { "@type": "Person", "name": "StepaniaH" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -36,20 +89,20 @@
         <svg width="28" height="28" aria-hidden="true"><use href="#i-lh"/></svg>
         <span>Port-Light</span>
       </a>
-      <nav class="nav-links" aria-label="Sections">
+      <nav class="nav-links" aria-label="Sections" data-i18n-attr="aria-label:nav.aria.sections">
         <a href="#how" data-i18n="nav.how">How it works</a>
         <a href="#features" data-i18n="nav.features">Features</a>
         <a href="#agents" data-i18n="nav.agents">Agents</a>
         <a href="#quickstart" data-i18n="nav.quickstart">Quick start</a>
       </nav>
       <div class="nav-actions">
-        <button id="nav-lang-btn" class="nav-btn nav-btn-lang" aria-haspopup="listbox" aria-expanded="false" title="Language">English</button>
-        <button id="nav-theme-btn" class="nav-btn" aria-haspopup="listbox" aria-expanded="false" title="Theme">🎨</button>
-        <a class="stat-pill hide-sm" href="https://github.com/StepaniaH/port-light" target="_blank" rel="noopener" title="GitHub stars">★ <b id="stat-stars">—</b></a>
+        <button id="nav-lang-btn" class="nav-btn nav-btn-lang" aria-haspopup="listbox" aria-expanded="false" title="Language" data-i18n-attr="title:nav.lang.title">English</button>
+        <button id="nav-theme-btn" class="nav-btn" aria-haspopup="listbox" aria-expanded="false" title="Theme" data-i18n-attr="title:nav.theme.title">🎨</button>
+        <a class="stat-pill hide-sm" href="https://github.com/StepaniaH/port-light" target="_blank" rel="noopener" title="GitHub stars" data-i18n-attr="title:nav.stars.title">★ <b id="stat-stars">—</b></a>
       </div>
     </div>
-    <div id="lang-menu" class="theme-menu lang-menu" role="listbox" aria-label="Language" hidden></div>
-    <div id="theme-menu" class="theme-menu" role="listbox" aria-label="Theme" hidden></div>
+    <div id="lang-menu" class="theme-menu lang-menu" role="listbox" aria-label="Language" data-i18n-attr="aria-label:lang.menu.aria" hidden></div>
+    <div id="theme-menu" class="theme-menu" role="listbox" aria-label="Theme" data-i18n-attr="aria-label:theme.menu.aria" hidden></div>
   </header>
 
   <main id="top">
@@ -68,13 +121,13 @@
           </div>
         </div>
         <div class="hero-demo">
-          <div class="demo-panel" aria-label="Interactive product demo (simulated data)">
+          <div class="demo-panel" aria-label="Interactive product demo (simulated data)" data-i18n-attr="aria-label:demo.panel.aria">
             <span class="demo-lighthouse" aria-hidden="true">
               <svg width="24" height="24"><use href="#i-lh"/></svg>
               <i class="beam"></i>
             </span>
             <div class="demo-head">
-              <input id="demo-search" type="text" inputmode="numeric" autocomplete="off" placeholder="Try 3000…" data-i18n-attr="placeholder:demo.search" aria-label="Search ports">
+              <input id="demo-search" type="text" inputmode="numeric" autocomplete="off" placeholder="Try 3000…" data-i18n-attr="placeholder:demo.search;aria-label:demo.search.aria" aria-label="Search ports">
             </div>
             <p id="demo-counts" class="demo-counts">45 in use · 4 configured</p>
             <div id="demo-grid" class="demo-grid"></div>
@@ -196,7 +249,7 @@
           <div class="fd-left">
             <button id="fd-back" class="fd-back" type="button" data-i18n="features.back">← All features</button>
             <div class="fd-card"></div>
-            <div class="fd-rail" role="tablist" aria-label="Features"></div>
+            <div class="fd-rail" role="tablist" aria-label="Features" data-i18n-attr="aria-label:features.rail.aria"></div>
           </div>
           <div class="fd-right">
             <div class="fd-body"></div>
@@ -364,7 +417,7 @@ docker compose up -d</pre>
   <footer>
     <div class="wrap foot-inner">
       <p class="foot-fine">Port-Light · MIT © 2026 StepaniaH</p>
-      <nav class="foot-links" aria-label="Footer">
+      <nav class="foot-links" aria-label="Footer" data-i18n-attr="aria-label:foot.aria">
         <a href="https://github.com/StepaniaH/port-light" target="_blank" rel="noopener">GitHub</a>
         <a href="https://hub.docker.com/r/stepaniah/port-light" target="_blank" rel="noopener">Docker Hub</a>
         <a href="https://github.com/StepaniaH/port-light/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a>

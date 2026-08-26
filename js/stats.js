@@ -1,17 +1,17 @@
 // Port-Light landing page — live GitHub stars + Docker Hub pulls + release
-// version (pulls/version via the /api/stats Pages Function; hub.docker.com
-// sends no CORS headers, so the browser goes through our own proxy. Baked
-// values are offline fallbacks).
+// version, all via /api/stats (a Pages Function proxying Docker Hub — which
+// sends no CORS headers — and the GitHub API, edge-cached so visitors never
+// hit upstream rate limits). The baked values in index.html are the offline
+// fallbacks; the baked version doubles as the single source for releases.
 
 const fmtK = (n) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, '')}K` : `${n}`);
 
-export function initStats({ starsFallback = 47, pullsFallback = 4745, versionFallback = 'v0.7.2' } = {}) {
+export function initStats({ starsFallback = 47, pullsFallback = 4745 } = {}) {
   const stars = document.getElementById('stat-stars');
   const pulls = document.getElementById('stat-pulls');
   if (!stars || !pulls) return;
   stars.textContent = fmtK(starsFallback);
   pulls.textContent = fmtK(pullsFallback);
-  for (const el of document.querySelectorAll('[data-app-version]')) el.textContent = versionFallback;
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const countUp = (el, target) => {
@@ -32,14 +32,10 @@ export function initStats({ starsFallback = 47, pullsFallback = 4745, versionFal
     requestAnimationFrame(tick);
   };
 
-  fetch('https://api.github.com/repos/StepaniaH/port-light')
-    .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-    .then((d) => { if (typeof d.stargazers_count === 'number') countUp(stars, d.stargazers_count); })
-    .catch(() => {});
-
   fetch('/api/stats')
     .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
     .then((d) => {
+      if (typeof d.stars === 'number') countUp(stars, d.stars);
       if (typeof d.pulls === 'number') countUp(pulls, d.pulls);
       if (typeof d.version === 'string' && /^v\d+\.\d+\.\d+/.test(d.version)) {
         for (const el of document.querySelectorAll('[data-app-version]')) el.textContent = d.version;

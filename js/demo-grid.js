@@ -53,7 +53,7 @@ const BEAM_PERIOD_MS = 12000;
 const USER_IDLE_MS = 12000;
 const TICK_MS = 7000;
 
-export function initDemoGrid(t = (key, params) => fallbackStr(key, params)) {
+export function initDemoGrid(t) {
   const grid = document.getElementById('demo-grid');
   if (!grid) return;
 
@@ -241,18 +241,4 @@ export function initDemoGrid(t = (key, params) => fallbackStr(key, params)) {
     });
   }
   setInterval(lightBeam, 150);
-}
-
-function fallbackStr(key, params = {}) {
-  const en = {
-    'demo.counts': '{u} in use · {c} configured',
-    'demo.free': 'free',
-    'demo.toast.listener': '{name} is now listening on {port}',
-    'demo.toast.conflict': 'Conflict: two stacks claim port {port}',
-    'demo.toast.free': '{port} is taken — {n} free ports nearby',
-    'demo.toast.copied': 'Copied {port}',
-  };
-  let s = en[key] ?? key;
-  for (const [k, v] of Object.entries(params)) s = s.replaceAll(`{${k}}`, v);
-  return s;
 }

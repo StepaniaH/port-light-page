@@ -125,6 +125,10 @@ export function initFeatures() {
     if (e.key === 'Escape' && current != null && !detail.hidden) close();
   });
   document.addEventListener('pl:lang', () => {
+    for (const b of rail.children) {
+      const card = cards.find((c) => c.dataset.feature === b.dataset.feature);
+      if (card) b.setAttribute('aria-label', card.querySelector('h3').textContent);
+    }
     const card = cards.find((c) => c.dataset.feature === current);
     if (card) render(card);
   });

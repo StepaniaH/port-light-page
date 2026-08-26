@@ -28,7 +28,15 @@ export const DEMO_KEYS = [
 
 export function getLang() {
   const saved = typeof localStorage !== 'undefined' ? localStorage.getItem('pl-lang') : null;
-  return LANGS.some((l) => l.code === saved) ? saved : 'en';
+  if (LANGS.some((l) => l.code === saved)) return saved;
+  const nav = typeof navigator !== 'undefined' && Array.isArray(navigator.languages) ? navigator.languages : [];
+  for (const n of nav) {
+    if (LANGS.some((l) => l.code === n)) return n;
+  }
+  for (const n of nav) {
+    if (/^zh/i.test(n)) return 'zh-CN';
+  }
+  return 'en';
 }
 
 export function t(key, params = {}, lang = getLang()) {
