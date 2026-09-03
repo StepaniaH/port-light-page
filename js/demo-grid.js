@@ -241,5 +241,13 @@ export function initDemoGrid(t) {
       cell.classList.toggle('lit', d > 168);
     });
   }
-  setInterval(lightBeam, 150);
+  // rAF keeps reads/writes in the same frame and self-pauses in hidden tabs.
+  let lastBeamAt = 0;
+  requestAnimationFrame(function beamLoop(now) {
+    if (now - lastBeamAt >= 150) {
+      lastBeamAt = now;
+      lightBeam();
+    }
+    requestAnimationFrame(beamLoop);
+  });
 }
