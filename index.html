@@ -64,6 +64,12 @@
       </g>
       <circle cx="32" cy="22.5" r="2.4" fill="var(--configured)"/>
     </symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24">
+      <g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <rect x="9" y="9" width="12" height="12" rx="2"/>
+        <path d="M5 15V5a2 2 0 0 1 2-2h10"/>
+      </g>
+    </symbol>
   </svg>
 
   <header class="nav">
@@ -96,7 +102,10 @@
           <h1 data-i18n="hero.title">Know which ports are taken, and which are free.</h1>
           <p class="lead" data-i18n="hero.sub">Port-Light merges your host's listen tables, Docker, and Compose files into a single traffic-light grid, so you can tell taken ports from free ones without reaching for ss.</p>
           <div class="hero-cta">
-            <button class="btn primary" data-copy="docker pull stepaniah/port-light">docker pull stepaniah/port-light</button>
+            <button class="btn primary" data-copy="docker pull stepaniah/port-light" data-i18n-attr="title:hero.cta.copy">
+              <span class="btn-label">docker pull stepaniah/port-light</span>
+              <svg class="ico-copy" width="15" height="15" aria-hidden="true"><use href="#i-copy"/></svg>
+            </button>
             <a class="btn" href="https://github.com/StepaniaH/port-light" target="_blank" rel="noopener" data-i18n="hero.cta.github">View on GitHub</a>
           </div>
           <div class="hero-stats">
@@ -456,6 +465,13 @@ docker compose up -d</pre>
       <div class="wrap" data-reveal>
         <h2 data-i18n="limits.title">A port occupancy map — not a container manager.</h2>
         <p class="lead" data-i18n-html="limits.body">Port-Light doesn't start or stop containers, tail logs, or replace Portainer. It serves one read-only page on your LAN — keep it behind Basic Auth or a reverse proxy and off the public internet. The <a href="https://github.com/StepaniaH/port-light/blob/main/SECURITY.md" target="_blank" rel="noopener">security checklist</a> collects the hardening notes.</p>
+        </div>
+        <div class="end-cta">
+          <button class="btn primary" data-copy="docker pull stepaniah/port-light" data-i18n-attr="title:hero.cta.copy">
+            <span class="btn-label">docker pull stepaniah/port-light</span>
+            <svg class="ico-copy" width="15" height="15" aria-hidden="true"><use href="#i-copy"/></svg>
+          </button>
+        </div>
       </div>
     </section>
   </main>

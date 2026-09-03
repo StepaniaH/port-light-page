@@ -25,9 +25,17 @@ export function initCopyButtons() {
     const payload = btn.dataset.copy ?? stripBtnLabel(btn.closest('pre'));
     if (payload == null) return;
     navigator.clipboard?.writeText(payload).catch(() => {});
-    const original = btn.textContent;
-    btn.textContent = '✓';
-    setTimeout(() => { btn.textContent = original; }, 1200);
+    const label = btn.querySelector('.btn-label');
+    if (label) {
+      const original = label.textContent;
+      btn.classList.add('copied');
+      label.textContent = '✓';
+      setTimeout(() => { btn.classList.remove('copied'); label.textContent = original; }, 1200);
+    } else {
+      const original = btn.textContent;
+      btn.textContent = '✓';
+      setTimeout(() => { btn.textContent = original; }, 1200);
+    }
   });
 }
 

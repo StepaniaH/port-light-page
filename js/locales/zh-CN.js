@@ -105,4 +105,5 @@ export default {
   'theme.everforest-light': 'Everforest 浅色',
   'theme.rose-pine-light': 'Rosé Pine 浅色',
   'theme.kanagawa-light': 'Kanagawa 浅色',
+  "hero.cta.copy": "点击复制",
 };

@@ -105,4 +105,5 @@ export default {
   'theme.everforest-light': 'Everforest Clair',
   'theme.rose-pine-light': 'Rosé Pine Clair',
   'theme.kanagawa-light': 'Kanagawa Clair',
+  "hero.cta.copy": "Cliquez pour copier",
 };

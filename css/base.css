@@ -100,6 +100,8 @@ h3 { font-size: 1.05rem; font-weight: 600; }
 .btn:hover { border-color: var(--accent); transform: translateY(-1px); text-decoration: none; }
 .btn.primary { background: var(--accent); color: var(--bg); border-color: transparent; font-family: var(--font-mono); font-weight: 500; font-size: .88rem; }
 .btn.primary:hover { filter: brightness(1.12); }
+.btn.primary .ico-copy { flex: none; opacity: .9; }
+.btn.copied .ico-copy { display: none; }
 
 code, pre { font-family: var(--font-mono); }
 
