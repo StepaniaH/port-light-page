@@ -88,7 +88,11 @@ export function initFeatures() {
     };
 
     if (fromGrid && !reduced) {
-      grid.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease-out' }).onfinish = showDetail;
+      document.documentElement.classList.add('scroll-lock');
+      grid.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease-out' }).onfinish = () => {
+        document.documentElement.classList.remove('scroll-lock');
+        showDetail();
+      };
     } else {
       showDetail();
     }
