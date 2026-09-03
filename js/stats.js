@@ -41,6 +41,18 @@ export function initStats({ starsFallback = 47, pullsFallback = 4745 } = {}) {
       if (typeof d.pulls === 'number') countUp(pulls, d.pulls);
       if (typeof d.version === 'string' && /^v\d+\.\d+\.\d+/.test(d.version)) {
         for (const el of document.querySelectorAll('[data-app-version]')) el.textContent = d.version;
+        // Keep the structured data consistent with the live release, even
+        // though crawlers that don't run JS only ever see the baked value.
+        const ld = document.querySelector('script[type="application/ld+json"]');
+        if (ld) {
+          try {
+            const data = JSON.parse(ld.textContent);
+            if (data.softwareVersion !== d.version) {
+              data.softwareVersion = d.version;
+              ld.textContent = JSON.stringify(data, null, 2);
+            }
+          } catch { /* malformed JSON-LD: leave the baked value */ }
+        }
       }
     })
     .catch(() => {});

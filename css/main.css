@@ -38,7 +38,7 @@
   transition: border-color .15s;
 }
 .nav-btn:hover { border-color: var(--accent); }
-.nav-btn-lang { width: auto; padding: 0 12px; font-size: .78rem; }
+.nav-btn svg { display: block; }
 .stat-pill {
   font-family: var(--font-mono);
   font-size: .75rem;
@@ -100,7 +100,10 @@ a.stat-pill:hover { text-decoration: none; border-color: var(--accent); color: v
 }
 .theme-menu button:hover { background: var(--card-hover); color: var(--text); }
 .theme-menu button:focus-visible { background: var(--card-hover); color: var(--text); }
-.theme-menu button.active { color: var(--accent); }
+.theme-menu button.active {
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
 
 /* ---------- hero ---------- */
 .hero { padding: 110px 0 90px; position: relative; overflow: hidden; }
@@ -504,6 +507,9 @@ a.stat-pill:hover { text-decoration: none; border-color: var(--accent); color: v
 .ecell.f { border-color: color-mix(in srgb, var(--free) 45%, transparent); background: color-mix(in srgb, var(--free) 8%, transparent); color: var(--free); }
 .echo-caption { margin: 0; font-size: .85rem; color: var(--text-dim); max-width: 44ch; }
 .echo-grid .ecell.fresh { border-color: var(--configured); box-shadow: 0 0 0 1px color-mix(in srgb, var(--configured) 55%, transparent); }
+.echo-grid .ecell.fresh.linked { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.agents-res { transition: color .15s; }
+.agents-res.hl { color: var(--text); }
 .agents-pills { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 18px; }
 .pill {
   font-family: var(--font-mono);

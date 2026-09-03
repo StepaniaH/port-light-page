@@ -25,3 +25,18 @@ initFeatures();
 for (const el of document.querySelectorAll('.agents-exp')) {
   el.textContent = new Date(Date.now() + 36e5).toISOString().replace(/\.\d+Z$/, 'Z');
 }
+
+// Link the decorative echo grid to the terminal reservations it illustrates:
+// hovering either side highlights both.
+for (const cell of document.querySelectorAll('.echo-grid [data-port]')) {
+  const line = document.querySelector(`.agents-res[data-port="${cell.dataset.port}"]`);
+  if (!line) continue;
+  const toggle = (on) => {
+    line.classList.toggle('hl', on);
+    cell.classList.toggle('linked', on);
+  };
+  for (const el of [cell, line]) {
+    el.addEventListener('mouseenter', () => toggle(true));
+    el.addEventListener('mouseleave', () => toggle(false));
+  }
+}

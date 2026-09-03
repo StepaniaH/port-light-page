@@ -39,8 +39,8 @@ test('nav: mobile menu button and panel exist', () => {
 
 test('agents echo: result caption + reserved-cell highlight present', () => {
   assert.match(html, /data-i18n="agents.echo.result"/);
-  assert.match(html, /<span class="ecell c fresh"><b>8081<\/b>/);
-  assert.match(html, /<span class="ecell c fresh"><b>8082<\/b>/);
+  assert.match(html, /<span class="ecell c fresh" data-port="8081"><b>8081<\/b>/);
+  assert.match(html, /<span class="ecell c fresh" data-port="8082"><b>8082<\/b>/);
 });
 
 test('faq: section renders 4 details items with i18n hooks', () => {
@@ -56,4 +56,18 @@ test('css: anchors clear the sticky nav; scroll-lock and theme-anim exist', asyn
   assert.match(base, /html\.scroll-lock/);
   assert.match(base, /html\.theme-anim/);
   assert.match(base, /\.sr-only/);
+});
+
+test('nav: language trigger is an icon; active dropdown option is boxed', async () => {
+  assert.match(html, /id="nav-lang-btn"[^>]*>\s*<svg[^>]*><use href="#i-lang"\/><\/svg>/);
+  assert.doesNotMatch(html, /id="nav-lang-btn"[^>]*>[^<]*[A-Za-z\u4e00-\u9fff]/, 'trigger must not show a language name');
+  const main = await css('../../css/main.css');
+  assert.match(main, /\.theme-menu button\.active \{[^}]*box-shadow/);
+});
+
+test('agents: reservation lines are wired to the echo grid', () => {
+  assert.match(html, /<span class="agents-res" data-port="8081">/);
+  assert.match(html, /<span class="agents-res" data-port="8082">/);
+  assert.match(html, /class="ecell c fresh" data-port="8081"/);
+  assert.match(html, /class="ecell c fresh" data-port="8082"/);
 });

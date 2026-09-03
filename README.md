@@ -41,8 +41,8 @@ To auto-deploy on push instead, connect the GitHub repo to the Pages project in 
 - Simulated Port-Light grid in the hero: a beam sweep, a rotating demo loop (new listener, Compose conflict, search suggestions). Visitors can type a port number or click a card to copy it.
 - The "how it works" source cards toggle which cells the merge grid highlights; the features section opens an inline detail view with a micro-demo per feature and an icon rail for switching.
 - 22 themes: the defaults plus ten palette families in light and dark, ported from the app's `frontend/style.css`. The picker re-skins the whole site.
-- Seven UI languages (English, 简体中文, 繁體中文, 日本語, Français, Deutsch, Español) via a custom dropdown in the nav — see "Localization" below.
-- GitHub stars, Docker pulls and the latest release version all fetched live through `/api/stats` (a Pages Function proxying Docker Hub — which sends no CORS headers — and the GitHub API, edge-cached with `s-maxage=3600` so visitors never hit upstream rate limits). Set an optional `GITHUB_TOKEN` secret on the Pages project to raise the GitHub rate limit. Baked values in `index.html` are the offline fallbacks.
+- Seven UI languages (English, 简体中文, 繁體中文, 日本語, Français, Deutsch, Español) via a custom dropdown in the nav — see "Localization" below. The trigger is a language-agnostic globe icon (endonyms only appear in the dropdown, where the active language is boxed).
+- GitHub stars, Docker pulls and the latest release version all fetched live through `/api/stats` (a Pages Function proxying Docker Hub — which sends no CORS headers — and the GitHub API, edge-cached with `s-maxage=3600` so visitors never hit upstream rate limits). Set an optional `GITHUB_TOKEN` secret on the Pages project to raise the GitHub rate limit. Baked values in `index.html` are the offline fallbacks; the live version also syncs the JSON-LD `softwareVersion`.
 - Social share card: `assets/og.png` (1200×630), generated from `assets/og-card.html`:
 
 ```bash
@@ -60,7 +60,7 @@ To auto-deploy on push instead, connect the GitHub repo to the Pages project in 
 - Demo cells are removed from the tab order (`tabindex="-1"`) so keyboard users aren't forced through ~46 stops; the language/theme menus support arrow-key navigation, and a minimal `404.html` keeps unknown URLs from soft-404ing into the homepage.
 - First visit follows the system light/dark preference (no saved pick, no `?theme=`); theme switches cross-fade via a temporary `.theme-anim` class.
 - Feature icons are theme-aware inline SVG; the docker pull CTA shows a copy icon and ✓ feedback; a bottom CTA repeats the quick start after the limits section.
-- FAQ section covers docker.sock permissions, COMPOSE_SCAN_DIR, exposure and agent port reservation; the agents echo grid is captioned as the result of the sample call.
+- FAQ section covers docker.sock permissions, COMPOSE_SCAN_DIR, exposure and agent port reservation; the agents echo grid is captioned as the result of the sample call, and hovering a reserved cell (or its terminal line) highlights both.
 - Mobile nav is a single 60px row with a hamburger section menu; anchors carry `scroll-margin-top` so the sticky nav never covers targets.
 
 URL parameters for sharing a state: `?lang=zh-CN`, `?theme=gruvbox`, `?q=3000` (prefills the demo search).
