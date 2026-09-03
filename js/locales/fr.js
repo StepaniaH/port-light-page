@@ -50,6 +50,8 @@ export default {
   'f7.b': 'Dix familles de palettes de Gruvbox à Kanagawa, en clair et en sombre ; sept langues d’interface.',
   'f8.t': 'Reste sur votre machine',
   'f8.b': 'Aucune télémétrie, aucun compte, aucun cloud. Votre carte des ports ne quitte jamais l’hôte.',
+  'f9.t': 'Planificateur de ports libres',
+  'f9.b': 'Trouve les plus grandes plages de ports libres contiguës et les réserve d’un bloc, de façon atomique.',
   'agents.kicker': 'Pour les agents de code',
   'agents.title': 'Une API de ports sur laquelle votre agent peut compter',
   'agents.lead': 'Les agents de code choisissent les ports au hasard, jusqu’à tomber sur un port déjà utilisé par vos stacks. Port-Light expose une petite API HTTP qui renvoie des ports réellement libres et peut les réserver via un bail à échéance. Un agent skill et un serveur MCP encapsulent les mêmes endpoints ; AGENT_TOKEN exige un en-tête d’authentification.',

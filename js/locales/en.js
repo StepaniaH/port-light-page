@@ -50,6 +50,8 @@ export default {
   'f7.b': 'Ten palette families from Gruvbox to Kanagawa, in light & dark; seven UI languages.',
   'f8.t': 'Stays on your machine',
   'f8.b': 'No telemetry, no accounts, no cloud. Your port map never leaves the host.',
+  'f9.t': 'Free-port planner',
+  'f9.b': 'Find the largest contiguous free runs in your range and reserve a batch atomically.',
   'agents.kicker': 'For coding agents',
   'agents.title': 'A port API your agent can rely on',
   'agents.lead': 'Coding agents pick ports by guessing until one collides with your stacks. Port-Light exposes a small HTTP API that returns ports which are free right now and can hold them with an expiring lease. An agent skill and an MCP server wrap the same endpoints; AGENT_TOKEN requires an auth header.',

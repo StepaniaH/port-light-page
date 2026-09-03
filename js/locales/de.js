@@ -50,6 +50,8 @@ export default {
   'f7.b': 'Zehn Palettenfamilien von Gruvbox bis Kanagawa, in hell und dunkel; sieben UI-Sprachen.',
   'f8.t': 'Bleibt auf deiner Maschine',
   'f8.b': 'Kein Telemetrie, keine Konten, keine Cloud. Deine Portkarte verlässt den Host nie.',
+  'f9.t': 'Frei-Port-Planer',
+  'f9.b': 'Findet die größten zusammenhängenden freien Port-Bereiche und reserviert sie atomar im Batch.',
   'agents.kicker': 'Für Coding-Agents',
   'agents.title': 'Eine Port-API, auf die sich dein Agent verlässt',
   'agents.lead': 'Coding-Agents wählen Ports durch Raten — und treffen früher oder später einen deiner Stacks. Port-Light bietet eine kleine HTTP-API, die aktuell freie Ports liefert und sie optional mit einer ablaufenden Lease reserviert. Ein Agent-Skill und ein MCP-Server kapseln dieselben Endpunkte; AGENT_TOKEN verlangt einen Auth-Header.',

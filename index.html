@@ -239,6 +239,11 @@
             <h3 data-i18n="f1.t">Search that suggests</h3>
             <p data-i18n="f1.b">Type a port number; if it's taken, nearby free ones light up.</p>
           </div>
+          <div class="feature-card" data-reveal data-feature="f9" role="button" tabindex="0" aria-expanded="false">
+            <span class="ico" aria-hidden="true">🧭</span>
+            <h3 data-i18n="f9.t">Free-port planner</h3>
+            <p data-i18n="f9.b">Find the largest contiguous free runs in your range and reserve a batch atomically.</p>
+          </div>
           <div class="feature-card" data-reveal data-feature="f2" role="button" tabindex="0" aria-expanded="false">
             <span class="ico" aria-hidden="true">⚠️</span>
             <h3 data-i18n="f2.t">Conflict radar</h3>
@@ -350,6 +355,13 @@
               <span class="chip off">accounts</span>
             </div>
             <div class="fdemo-line mono-dim">bind: 127.0.0.1 — LAN only</div>
+          </div>
+        </template>
+        <template id="fdemo-f9">
+          <div class="fdemo fdemo-term">
+            <div class="fdemo-line">GET /api/free-runs?count=8</div>
+            <div class="fdemo-line dim">{ "runs": [[6100, 6107]] }</div>
+            <div class="fdemo-line"><i class="fd-caret"></i></div>
           </div>
         </template>
       </div>
