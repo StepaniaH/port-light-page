@@ -58,6 +58,10 @@ To auto-deploy on push instead, connect the GitHub repo to the Pages project in 
 ```
 - Scroll reveals and copy buttons; all motion respects `prefers-reduced-motion`, and the page stays readable with JavaScript disabled: the hero grid is baked into `index.html` (46 static cells + counts line) and replaced by the live engine on boot. A test keeps the baked markup in sync with `PORTS`.
 - Demo cells are removed from the tab order (`tabindex="-1"`) so keyboard users aren't forced through ~46 stops; the language/theme menus support arrow-key navigation, and a minimal `404.html` keeps unknown URLs from soft-404ing into the homepage.
+- First visit follows the system light/dark preference (no saved pick, no `?theme=`); theme switches cross-fade via a temporary `.theme-anim` class.
+- Feature icons are theme-aware inline SVG; the docker pull CTA shows a copy icon and ✓ feedback; a bottom CTA repeats the quick start after the limits section.
+- FAQ section covers docker.sock permissions, COMPOSE_SCAN_DIR, exposure and agent port reservation; the agents echo grid is captioned as the result of the sample call.
+- Mobile nav is a single 60px row with a hamburger section menu; anchors carry `scroll-margin-top` so the sticky nav never covers targets.
 
 URL parameters for sharing a state: `?lang=zh-CN`, `?theme=gruvbox`, `?q=3000` (prefills the demo search).
 
@@ -93,6 +97,7 @@ js/i18n.js        i18n engine: language metadata, t(), applyLang()
 js/menu-nav.js    shared arrow-key navigation for the language/theme menus
 js/locales/       one dictionary file per language
 js/lang.js        custom language dropdown
+js/nav-mobile.js   mobile section menu (hamburger)
 js/demo-grid.js   simulated grid engine
 js/sources.js     source cards expand + merge-grid focus
 js/features.js    feature detail view with micro-demos
@@ -107,7 +112,7 @@ js/test/          unit tests (node --test, no npm)
 Tests:
 
 ```bash
-node --test js/test/i18n.test.mjs js/test/demo-data.test.mjs
+node --test js/test/i18n.test.mjs js/test/demo-data.test.mjs js/test/page-markup.test.mjs
 ```
 
 CI runs the same tests on every push and PR (`.github/workflows/test.yml`).
