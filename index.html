@@ -70,6 +70,60 @@
         <path d="M5 15V5a2 2 0 0 1 2-2h10"/>
       </g>
     </symbol>
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <g stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="M16.5 16.5 21 21"/>
+      </g>
+    </symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24">
+      <g stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M14.8 9.2l-1.9 4.7-4.7 1.9 1.9-4.7z"/>
+      </g>
+    </symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24">
+      <g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M12 3 22 20H2Z"/>
+        <path d="M12 9.5v4.5"/>
+        <path d="M12 17.2v.1"/>
+      </g>
+    </symbol>
+    <symbol id="i-screen" viewBox="0 0 24 24">
+      <g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <rect x="2" y="4" width="20" height="14" rx="2"/>
+        <path d="M8 21h8M12 18v3"/>
+      </g>
+    </symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24">
+      <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/>
+    </symbol>
+    <symbol id="i-hook" viewBox="0 0 24 24">
+      <g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1.5 1.5"/>
+        <path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1.5-1.5"/>
+      </g>
+    </symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24">
+      <g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <rect x="4" y="8" width="16" height="12" rx="2"/>
+        <path d="M12 8V4M2 14h2M20 14h2"/>
+      </g>
+      <circle cx="9" cy="14" r="1.2" fill="currentColor"/>
+      <circle cx="15" cy="14" r="1.2" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24">
+      <g stroke="currentColor" stroke-width="2" fill="none">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor" stroke="none"/>
+      </g>
+    </symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24">
+      <g stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <rect x="5" y="11" width="14" height="9" rx="2"/>
+        <path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+      </g>
+    </symbol>
   </svg>
 
   <header class="nav">
@@ -244,47 +298,47 @@
         </div>
         <div class="feature-grid" id="feature-grid">
           <div class="feature-card" data-reveal data-feature="f1" role="button" tabindex="0" aria-expanded="false">
-            <span class="ico" aria-hidden="true">🔍</span>
+            <span class="ico" aria-hidden="true"><svg width="24" height="24" aria-hidden="true"><use href="#i-search"/></svg></span>
             <h3 data-i18n="f1.t">Search that suggests</h3>
             <p data-i18n="f1.b">Type a port number; if it's taken, nearby free ones light up.</p>
           </div>
           <div class="feature-card" data-reveal data-feature="f9" role="button" tabindex="0" aria-expanded="false">
-            <span class="ico" aria-hidden="true">🧭</span>
+            <span class="ico" aria-hidden="true"><svg width="24" height="24" aria-hidden="true"><use href="#i-compass"/></svg></span>
             <h3 data-i18n="f9.t">Free-port planner</h3>
             <p data-i18n="f9.b">Find the largest contiguous free runs in your range and reserve a batch atomically.</p>
           </div>
           <div class="feature-card" data-reveal data-feature="f2" role="button" tabindex="0" aria-expanded="false">
-            <span class="ico" aria-hidden="true">⚠️</span>
+            <span class="ico" aria-hidden="true"><svg width="24" height="24" aria-hidden="true"><use href="#i-warn"/></svg></span>
             <h3 data-i18n="f2.t">Conflict radar</h3>
             <p data-i18n="f2.b">Two Compose projects claiming the same host port get flagged before they collide.</p>
           </div>
           <div class="feature-card" data-reveal data-feature="f3" role="button" tabindex="0" aria-expanded="false">
-            <span class="ico" aria-hidden="true">🖥️</span>
+            <span class="ico" aria-hidden="true"><svg width="24" height="24" aria-hidden="true"><use href="#i-screen"/></svg></span>
             <h3 data-i18n="f3.t">Multi-host, one screen</h3>
             <p data-i18n="f3.b">Pull occupancy maps from other Port-Light instances over LAN or Tailscale.</p>
           </div>
           <div class="feature-card" data-reveal data-feature="f4" role="button" tabindex="0" aria-expanded="false">
-            <span class="ico" aria-hidden="true">⚡</span>
+            <span class="ico" aria-hidden="true"><svg width="24" height="24" aria-hidden="true"><use href="#i-bolt"/></svg></span>
             <h3 data-i18n="f4.t">Live updates</h3>
             <p data-i18n="f4.b">SSE pushes a refresh the moment occupancy changes; local history records each transition.</p>
           </div>
           <div class="feature-card" data-reveal data-feature="f5" role="button" tabindex="0" aria-expanded="false">
-            <span class="ico" aria-hidden="true">🪝</span>
+            <span class="ico" aria-hidden="true"><svg width="24" height="24" aria-hidden="true"><use href="#i-hook"/></svg></span>
             <h3 data-i18n="f5.t">Hooks &amp; metrics</h3>
             <p data-i18n="f5.b">Optional webhooks on new listeners and conflicts; Prometheus aggregates when you want them.</p>
           </div>
           <div class="feature-card" data-reveal data-feature="f6" role="button" tabindex="0" aria-expanded="false">
-            <span class="ico" aria-hidden="true">🤖</span>
+            <span class="ico" aria-hidden="true"><svg width="24" height="24" aria-hidden="true"><use href="#i-bot"/></svg></span>
             <h3 data-i18n="f6.t">Agent-friendly API</h3>
             <p data-i18n="f6.b">GET /api/ports/suggest returns a free port and can reserve it with an expiring lease.</p>
           </div>
           <div class="feature-card" data-reveal data-feature="f7" role="button" tabindex="0" aria-expanded="false">
-            <span class="ico" aria-hidden="true">🎨</span>
+            <span class="ico" aria-hidden="true"><svg width="24" height="24" aria-hidden="true"><use href="#i-palette"/></svg></span>
             <h3 data-i18n="f7.t">Speaks your theme</h3>
             <p data-i18n="f7.b">Ten palette families from Gruvbox to Kanagawa, in light &amp; dark; seven UI languages.</p>
           </div>
           <div class="feature-card" data-reveal data-feature="f8" role="button" tabindex="0" aria-expanded="false">
-            <span class="ico" aria-hidden="true">🔒</span>
+            <span class="ico" aria-hidden="true"><svg width="24" height="24" aria-hidden="true"><use href="#i-lock"/></svg></span>
             <h3 data-i18n="f8.t">Stays on your machine</h3>
             <p data-i18n="f8.b">No telemetry, no accounts, no cloud. Your port map never leaves the host.</p>
           </div>

@@ -26,7 +26,7 @@ export function initFeatures() {
     b.className = 'fd-ico';
     b.dataset.feature = card.dataset.feature;
     b.setAttribute('aria-label', card.querySelector('h3').textContent);
-    b.textContent = card.querySelector('.ico').textContent;
+    b.replaceChildren(card.querySelector('.ico').cloneNode(true));
     b.addEventListener('click', () => (current === card.dataset.feature ? close() : open(card, false)));
     rail.append(b);
   }
