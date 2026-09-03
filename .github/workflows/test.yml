@@ -12,4 +12,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node --test js/test/i18n.test.mjs js/test/demo-data.test.mjs
+      - run: node --test js/test/i18n.test.mjs js/test/demo-data.test.mjs js/test/page-markup.test.mjs

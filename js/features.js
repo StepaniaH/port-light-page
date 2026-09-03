@@ -26,7 +26,7 @@ export function initFeatures() {
     b.className = 'fd-ico';
     b.dataset.feature = card.dataset.feature;
     b.setAttribute('aria-label', card.querySelector('h3').textContent);
-    b.textContent = card.querySelector('.ico').textContent;
+    b.replaceChildren(card.querySelector('.ico').cloneNode(true));
     b.addEventListener('click', () => (current === card.dataset.feature ? close() : open(card, false)));
     rail.append(b);
   }
@@ -88,7 +88,17 @@ export function initFeatures() {
     };
 
     if (fromGrid && !reduced) {
-      grid.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease-out' }).onfinish = showDetail;
+      document.documentElement.classList.add('scroll-lock');
+      const fade = grid.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease-out' });
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        document.documentElement.classList.remove('scroll-lock');
+        showDetail();
+      };
+      fade.onfinish = finish;
+      fade.oncancel = finish;
     } else {
       showDetail();
     }

@@ -50,11 +50,6 @@ export function applyLang(lang) {
   if (!LANGS.some((l) => l.code === lang)) lang = 'en';
   if (typeof localStorage !== 'undefined') localStorage.setItem('pl-lang', lang);
   document.documentElement.lang = lang;
-  const btn = document.getElementById('nav-lang-btn');
-  if (btn) {
-    const meta = LANGS.find((l) => l.code === lang);
-    btn.textContent = meta ? meta.endonym : 'English';
-  }
   for (const b of document.querySelectorAll('#lang-menu button')) {
     const active = b.dataset.lang === lang;
     b.classList.toggle('active', active);

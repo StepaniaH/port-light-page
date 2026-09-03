@@ -8,7 +8,7 @@
 const DOCKER_UPSTREAM = 'https://hub.docker.com/v2/repositories/stepaniah/port-light/';
 const GITHUB_REPO = 'https://api.github.com/repos/StepaniaH/port-light';
 const GITHUB_RELEASE = 'https://api.github.com/repos/StepaniaH/port-light/releases/latest';
-const FALLBACK = { stars: 47, pulls: 4745, version: 'v0.7.7' };
+const FALLBACK = { stars: 52, pulls: 8567, version: 'v0.7.8' };
 const TTL = 3600;
 
 async function metric(url, options, pick) {

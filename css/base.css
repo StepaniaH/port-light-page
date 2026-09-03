@@ -5,6 +5,43 @@
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
+/* Sticky nav is 60px; keep anchor targets visible below it. */
+[id] { scroll-margin-top: 76px; }
+
+/* Scroll lock during FLIP transitions (features.js). */
+html.scroll-lock { overflow: hidden; }
+
+/* Theme cross-fade: html.theme-anim is applied for ~400ms around an explicit
+   theme change (themes.js) so colors glide between palettes without taxing
+   hover states or static rendering. */
+html.theme-anim, html.theme-anim *:not([data-reveal]),
+html.theme-anim *::before, html.theme-anim *::after {
+  transition:
+    background-color .3s ease,
+    border-color .3s ease,
+    color .3s ease,
+    fill .3s ease,
+    stroke .3s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-anim, html.theme-anim *:not([data-reveal]),
+  html.theme-anim *::before, html.theme-anim *::after { transition: none; }
+}
+
+/* Screen-reader-only text (demo panel instructions). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Non-English first paint: hide until the locale applies (see inline head
    script + applyLang); the head script's timeout is the failsafe. */
 html.lang-pending body { visibility: hidden; }
@@ -63,6 +100,8 @@ h3 { font-size: 1.05rem; font-weight: 600; }
 .btn:hover { border-color: var(--accent); transform: translateY(-1px); text-decoration: none; }
 .btn.primary { background: var(--accent); color: var(--bg); border-color: transparent; font-family: var(--font-mono); font-weight: 500; font-size: .88rem; }
 .btn.primary:hover { filter: brightness(1.12); }
+.btn.primary .ico-copy { flex: none; opacity: .9; }
+.btn.copied .ico-copy { display: none; }
 
 code, pre { font-family: var(--font-mono); }
 

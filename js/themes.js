@@ -44,10 +44,14 @@ export function getTheme() {
   return document.documentElement.dataset.theme || 'dark';
 }
 
-export function applyTheme(id) {
+let themeAnimTimer = 0;
+
+export function applyTheme(id, { animate = true, persist = true } = {}) {
   if (!THEMES.includes(id)) id = 'dark';
   document.documentElement.dataset.theme = id;
-  try { localStorage.setItem('pl-theme', id); } catch { /* private mode */ }
+  if (persist) {
+    try { localStorage.setItem('pl-theme', id); } catch { /* private mode */ }
+  }
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta && SWATCH[id]) meta.setAttribute('content', SWATCH[id][0]);
   for (const card of document.querySelectorAll('[data-theme-card]')) {
@@ -58,13 +62,20 @@ export function applyTheme(id) {
     btn.classList.toggle('active', active);
     btn.setAttribute('aria-selected', String(active));
   }
+  const root = document.documentElement;
+  if (animate && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    root.classList.add('theme-anim');
+    clearTimeout(themeAnimTimer);
+    themeAnimTimer = setTimeout(() => root.classList.remove('theme-anim'), 400);
+  }
 }
 
 export function initThemes(urlTheme = null) {
-  let saved = 'dark';
-  try { saved = localStorage.getItem('pl-theme') ?? 'dark'; } catch { /* private mode */ }
+  let saved = null;
+  try { saved = localStorage.getItem('pl-theme'); } catch { /* private mode */ }
+  if (!saved && matchMedia('(prefers-color-scheme: light)').matches) saved = 'light';
   if (THEMES.includes(urlTheme)) saved = urlTheme;
-  applyTheme(saved);
+  applyTheme(saved ?? 'dark', { animate: false, persist: false });
 
   const menu = document.getElementById('theme-menu');
   const btn = document.getElementById('nav-theme-btn');
@@ -112,17 +123,26 @@ export function initThemes(urlTheme = null) {
       card.className = 'theme-card' + (id === saved ? ' active' : '');
       card.dataset.themeCard = id;
       card.setAttribute('aria-label', themeLabel(id));
-      const swatches = document.createElement('span');
-      swatches.className = 'swatches';
-      for (const c of [bg, used, configured, free]) {
+      // Miniature of the demo panel: a search bar over a row of cells,
+      // so each card previews the UI, not just flat colors.
+      const preview = document.createElement('span');
+      preview.className = 'tpreview';
+      const bar = document.createElement('i');
+      bar.className = 'bar';
+      bar.style.background = bg;
+      const mini = document.createElement('span');
+      mini.className = 'mini';
+      mini.style.background = bg;
+      for (const c of [used, configured, free]) {
         const i = document.createElement('i');
         i.style.background = c;
-        swatches.append(i);
+        mini.append(i);
       }
+      preview.append(bar, mini);
       const name = document.createElement('span');
       name.className = 'tname';
       name.textContent = themeLabel(id);
-      card.append(swatches, name);
+      card.append(preview, name);
       card.addEventListener('click', () => applyTheme(id));
       gallery.append(card);
     }
