@@ -108,4 +108,5 @@ export default {
   "hero.cta.copy": "点击复制",
   "demo.panel.hint": "互动演示：在搜索框输入端口号，或点击任意卡片复制该端口。",
   "nav.menu.aria": "菜单",
+  "agents.echo.result": "上方调用的结果 —— 8081 和 8082 已被预留：",
 };

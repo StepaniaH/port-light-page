@@ -108,4 +108,5 @@ export default {
   "hero.cta.copy": "Klicken zum Kopieren",
   "demo.panel.hint": "Interaktive Demo: Gib eine Portnummer in das Suchfeld ein oder klicke auf eine Karte, um den Port zu kopieren.",
   "nav.menu.aria": "Menü",
+  "agents.echo.result": "Ergebnis des obigen Aufrufs — 8081 und 8082 sind jetzt reserviert:",
 };

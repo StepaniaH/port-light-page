@@ -108,4 +108,5 @@ export default {
   "hero.cta.copy": "點擊複製",
   "demo.panel.hint": "互動示範：在搜尋框輸入連接埠號，或點擊任意卡片複製該連接埠。",
   "nav.menu.aria": "選單",
+  "agents.echo.result": "上方呼叫的結果 —— 8081 和 8082 已被預留：",
 };

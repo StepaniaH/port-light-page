@@ -108,4 +108,5 @@ export default {
   "hero.cta.copy": "クリックでコピー",
   "demo.panel.hint": "デモ：検索ボックスにポート番号を入力するか、カードをクリックするとポートをコピーできます。",
   "nav.menu.aria": "メニュー",
+  "agents.echo.result": "上の呼び出しの結果 —— 8081 と 8082 は予約されました：",
 };
