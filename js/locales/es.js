@@ -107,4 +107,5 @@ export default {
   'theme.kanagawa-light': 'Kanagawa Claro',
   "hero.cta.copy": "Haga clic para copiar",
   "demo.panel.hint": "Demo interactiva: escribe un número de puerto en el cuadro de búsqueda o haz clic en una tarjeta para copiar su puerto.",
+  "nav.menu.aria": "Menú",
 };

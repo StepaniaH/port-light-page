@@ -107,4 +107,5 @@ export default {
   'theme.kanagawa-light': 'Kanagawa ライト',
   "hero.cta.copy": "クリックでコピー",
   "demo.panel.hint": "デモ：検索ボックスにポート番号を入力するか、カードをクリックするとポートをコピーできます。",
+  "nav.menu.aria": "メニュー",
 };

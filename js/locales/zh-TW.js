@@ -107,4 +107,5 @@ export default {
   'theme.kanagawa-light': 'Kanagawa 淺色',
   "hero.cta.copy": "點擊複製",
   "demo.panel.hint": "互動示範：在搜尋框輸入連接埠號，或點擊任意卡片複製該連接埠。",
+  "nav.menu.aria": "選單",
 };

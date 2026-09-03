@@ -107,4 +107,5 @@ export default {
   'theme.kanagawa-light': 'Kanagawa 浅色',
   "hero.cta.copy": "点击复制",
   "demo.panel.hint": "互动演示：在搜索框输入端口号，或点击任意卡片复制该端口。",
+  "nav.menu.aria": "菜单",
 };

@@ -107,4 +107,5 @@ export default {
   'theme.kanagawa-light': 'Kanagawa Hell',
   "hero.cta.copy": "Klicken zum Kopieren",
   "demo.panel.hint": "Interaktive Demo: Gib eine Portnummer in das Suchfeld ein oder klicke auf eine Karte, um den Port zu kopieren.",
+  "nav.menu.aria": "Menü",
 };

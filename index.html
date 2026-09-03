@@ -124,6 +124,9 @@
         <path d="M8 11V8a4 4 0 0 1 8 0v3"/>
       </g>
     </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </symbol>
   </svg>
 
   <header class="nav">
@@ -142,8 +145,17 @@
         <button id="nav-lang-btn" class="nav-btn nav-btn-lang" aria-haspopup="listbox" aria-expanded="false" title="Language" data-i18n-attr="title:nav.lang.title">English</button>
         <button id="nav-theme-btn" class="nav-btn" aria-haspopup="listbox" aria-expanded="false" title="Theme" data-i18n-attr="title:nav.theme.title">🎨</button>
         <a class="stat-pill hide-sm" href="https://github.com/StepaniaH/port-light" target="_blank" rel="noopener" title="GitHub stars" data-i18n-attr="title:nav.stars.title">★ <b id="stat-stars">—</b></a>
+        <button id="nav-menu-btn" class="nav-btn nav-btn-menu" aria-expanded="false" aria-controls="nav-mobile" data-i18n-attr="aria-label:nav.menu.aria;title:nav.menu.aria">
+          <svg width="18" height="18" aria-hidden="true"><use href="#i-menu"/></svg>
+        </button>
       </div>
     </div>
+    <nav id="nav-mobile" class="nav-mobile" aria-label="Sections" data-i18n-attr="aria-label:nav.aria.sections" hidden>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#agents" data-i18n="nav.agents">Agents</a>
+      <a href="#quickstart" data-i18n="nav.quickstart">Quick start</a>
+    </nav>
     <div id="lang-menu" class="theme-menu lang-menu" role="listbox" aria-label="Language" data-i18n-attr="aria-label:lang.menu.aria" hidden></div>
     <div id="theme-menu" class="theme-menu" role="listbox" aria-label="Theme" data-i18n-attr="aria-label:theme.menu.aria" hidden></div>
   </header>

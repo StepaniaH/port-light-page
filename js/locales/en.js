@@ -107,4 +107,5 @@ export default {
   'theme.kanagawa-light': 'Kanagawa Light',
   "hero.cta.copy": "Click to copy",
   "demo.panel.hint": "Interactive demo: type a port number in the search box, or click any card to copy its port.",
+  "nav.menu.aria": "Menu",
 };
