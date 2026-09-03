@@ -96,4 +96,11 @@ export default {
   'theme.everforest': 'Everforest',
   'theme.rose-pine': 'Rosé Pine',
   'theme.kanagawa': 'Kanagawa',
+  'theme.nord-light': 'Nord Hell',
+  'theme.dracula-light': 'Dracula Hell',
+  'theme.tokyo-night-light': 'Tokyo Night Hell',
+  'theme.one-dark-light': 'One Dark Hell',
+  'theme.everforest-light': 'Everforest Hell',
+  'theme.rose-pine-light': 'Rosé Pine Hell',
+  'theme.kanagawa-light': 'Kanagawa Hell',
 };

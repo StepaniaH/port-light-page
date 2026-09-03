@@ -1,4 +1,4 @@
-// Port-Light landing page — theme switcher (15 palettes) + gallery.
+// Port-Light landing page — theme switcher (22 themes) + gallery.
 // Display names come from the locale files under theme.* so the menu and
 // gallery follow the UI language.
 
@@ -7,8 +7,9 @@ import { moveFocus } from './menu-nav.js';
 
 export const THEMES = [
   'dark', 'light', 'gruvbox', 'gruvbox-light', 'catppuccin', 'catppuccin-latte',
-  'nord', 'dracula', 'tokyo-night', 'one-dark', 'solarized', 'solarized-light',
-  'everforest', 'rose-pine', 'kanagawa',
+  'nord', 'nord-light', 'dracula', 'dracula-light', 'tokyo-night', 'tokyo-night-light',
+  'one-dark', 'one-dark-light', 'solarized', 'solarized-light',
+  'everforest', 'everforest-light', 'rose-pine', 'rose-pine-light', 'kanagawa', 'kanagawa-light',
 ];
 
 const themeLabel = (id) => t(`theme.${id}`) ?? id;
@@ -22,14 +23,21 @@ const SWATCH = {
   catppuccin: ['#1e1e2e', '#89b4fa', '#f9e2af', '#a6e3a1'],
   'catppuccin-latte': ['#eff1f5', '#1e66f5', '#df8e1d', '#40a02b'],
   nord: ['#2e3440', '#88c0d0', '#ebcb8b', '#a3be8c'],
+  'nord-light': ['#e9edf2', '#2f5e77', '#765400', '#41651f'],
   dracula: ['#282a36', '#8be9fd', '#f1fa8c', '#50fa7b'],
+  'dracula-light': ['#fffbeb', '#036a96', '#705c0f', '#14710a'],
   'tokyo-night': ['#1a1b26', '#7aa2f7', '#e0af68', '#9ece6a'],
+  'tokyo-night-light': ['#e1e2e7', '#1d4fa0', '#6c4d13', '#3b5c26'],
   'one-dark': ['#282c34', '#61afef', '#e5c07b', '#98c379'],
+  'one-dark-light': ['#fafafa', '#275da8', '#785a00', '#3f651f'],
   solarized: ['#002b36', '#268bd2', '#b58900', '#859900'],
   'solarized-light': ['#fdf6e3', '#268bd2', '#b58900', '#859900'],
   everforest: ['#2d353b', '#7fbbb3', '#dbbc7f', '#a7c080'],
+  'everforest-light': ['#f3ead3', '#28625d', '#715400', '#4a5f24'],
   'rose-pine': ['#191724', '#9ccfd8', '#f6c177', '#31748f'],
+  'rose-pine-light': ['#faf4ed', '#27667f', '#815600', '#396b54'],
   kanagawa: ['#1f1f28', '#7e9cd8', '#e6c384', '#98bb6c'],
+  'kanagawa-light': ['#f2ecbc', '#345a87', '#6e550c', '#4e5d25'],
 };
 
 export function getTheme() {

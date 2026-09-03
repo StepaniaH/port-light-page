@@ -299,3 +299,136 @@
   --radius: 8px;
   --radius-sm: 6px;
 }
+
+:root[data-theme="nord-light"] {
+  color-scheme: light;
+  --bg: #e9edf2;
+  --elevated: #f8fafc;
+  --card: #f8fafc;
+  --card-hover: #dfe5eb;
+  --border: #bdc7d4;
+  --text: #2e3440;
+  --text-dim: #4c596b;
+  --used: #2f5e77;
+  --configured: #765400;
+  --free: #41651f;
+  --accent: #2f5e77;
+  --conflict: #89452e;
+  --danger: #a52d3d;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="dracula-light"] {
+  color-scheme: light;
+  --bg: #fffbeb;
+  --elevated: #fffefa;
+  --card: #fffefa;
+  --card-hover: #f0eddc;
+  --border: #cec9b6;
+  --text: #1f1f1f;
+  --text-dim: #5b5641;
+  --used: #036a96;
+  --configured: #705c0f;
+  --free: #14710a;
+  --accent: #644ac9;
+  --conflict: #994912;
+  --danger: #a92f25;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="tokyo-night-light"] {
+  color-scheme: light;
+  --bg: #e1e2e7;
+  --elevated: #f7f8fb;
+  --card: #f7f8fb;
+  --card-hover: #dce0eb;
+  --border: #b7bfd3;
+  --text: #253156;
+  --text-dim: #43517e;
+  --used: #1d4fa0;
+  --configured: #6c4d13;
+  --free: #3b5c26;
+  --accent: #1d4fa0;
+  --conflict: #814300;
+  --danger: #a21849;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="one-dark-light"] {
+  color-scheme: light;
+  --bg: #fafafa;
+  --elevated: #ffffff;
+  --card: #f3f4f5;
+  --card-hover: #e9ebee;
+  --border: #c5c9d1;
+  --text: #383a42;
+  --text-dim: #59606c;
+  --used: #275da8;
+  --configured: #785a00;
+  --free: #3f651f;
+  --accent: #275da8;
+  --conflict: #914900;
+  --danger: #aa3443;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="everforest-light"] {
+  color-scheme: light;
+  --bg: #f3ead3;
+  --elevated: #fdf6e3;
+  --card: #fff9e8;
+  --card-hover: #eee5cf;
+  --border: #c4c7af;
+  --text: #414c43;
+  --text-dim: #5c6656;
+  --used: #28625d;
+  --configured: #715400;
+  --free: #4a5f24;
+  --accent: #28625d;
+  --conflict: #85452a;
+  --danger: #963535;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="rose-pine-light"] {
+  color-scheme: light;
+  --bg: #faf4ed;
+  --elevated: #fffaf3;
+  --card: #fffaf3;
+  --card-hover: #f2e9e1;
+  --border: #d8cec4;
+  --text: #575279;
+  --text-dim: #68607c;
+  --used: #27667f;
+  --configured: #815600;
+  --free: #396b54;
+  --accent: #714f88;
+  --conflict: #92492b;
+  --danger: #a23653;
+  --radius: 8px;
+  --radius-sm: 6px;
+}
+
+:root[data-theme="kanagawa-light"] {
+  color-scheme: light;
+  --bg: #f2ecbc;
+  --elevated: #fff8d5;
+  --card: #faf3cf;
+  --card-hover: #e8e1b3;
+  --border: #c6bea0;
+  --text: #434343;
+  --text-dim: #625f55;
+  --used: #345a87;
+  --configured: #6e550c;
+  --free: #4e5d25;
+  --accent: #345a87;
+  --conflict: #8a412c;
+  --danger: #9e3035;
+  --radius: 8px;
+  --radius-sm: 6px;
+}

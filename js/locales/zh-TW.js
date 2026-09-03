@@ -96,4 +96,11 @@ export default {
   'theme.everforest': 'Everforest',
   'theme.rose-pine': 'Rosé Pine',
   'theme.kanagawa': 'Kanagawa',
+  'theme.nord-light': 'Nord 淺色',
+  'theme.dracula-light': 'Dracula 淺色',
+  'theme.tokyo-night-light': 'Tokyo Night 淺色',
+  'theme.one-dark-light': 'One Dark 淺色',
+  'theme.everforest-light': 'Everforest 淺色',
+  'theme.rose-pine-light': 'Rosé Pine 淺色',
+  'theme.kanagawa-light': 'Kanagawa 淺色',
 };

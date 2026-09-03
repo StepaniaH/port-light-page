@@ -96,4 +96,11 @@ export default {
   'theme.everforest': 'Everforest',
   'theme.rose-pine': 'Rosé Pine',
   'theme.kanagawa': 'Kanagawa',
+  'theme.nord-light': 'Nord Claro',
+  'theme.dracula-light': 'Dracula Claro',
+  'theme.tokyo-night-light': 'Tokyo Night Claro',
+  'theme.one-dark-light': 'One Dark Claro',
+  'theme.everforest-light': 'Everforest Claro',
+  'theme.rose-pine-light': 'Rosé Pine Claro',
+  'theme.kanagawa-light': 'Kanagawa Claro',
 };
