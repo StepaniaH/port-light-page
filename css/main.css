@@ -557,6 +557,37 @@ a.stat-pill:hover { text-decoration: none; border-color: var(--accent); color: v
 .qs-open .mono { color: var(--free); }
 .qs-note { margin: 0; font-size: .85rem; color: var(--text-dim); }
 
+/* ---------- faq ---------- */
+.faq-list { display: grid; gap: 10px; margin-top: 40px; max-width: 760px; }
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.faq-item summary {
+  cursor: pointer;
+  padding: 14px 18px;
+  font-weight: 600;
+  font-family: var(--font-display);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  transition: transform .2s ease, color .2s;
+}
+.faq-item summary:hover { color: var(--accent); }
+.faq-item[open] summary { color: var(--accent); }
+.faq-item[open] summary::after { transform: rotate(45deg); color: var(--accent); }
+.faq-item p { margin: 0; padding: 0 18px 14px; color: var(--text-dim); font-size: .92rem; }
+
 /* ---------- limits ---------- */
 .limits {
   background: var(--elevated);

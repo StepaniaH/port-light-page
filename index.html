@@ -530,6 +530,33 @@ docker compose up -d</pre>
       </div>
     </section>
 
+    <section id="faq">
+      <div class="wrap">
+        <div data-reveal>
+          <p class="kicker" data-i18n="faq.kicker">FAQ</p>
+          <h2 data-i18n="faq.title">Common questions, quick answers.</h2>
+        </div>
+        <div class="faq-list" data-reveal>
+          <details class="faq-item">
+            <summary><span data-i18n="faq.q1">docker.sock: permission denied?</span></summary>
+            <p data-i18n="faq.a1">The Compose file mounts /var/run/docker.sock read-only. If the container logs permission errors, verify the socket path on your host and that the container user can read it — no privileged mode is needed.</p>
+          </details>
+          <details class="faq-item">
+            <summary><span data-i18n="faq.q2">My Compose stacks don't show up.</span></summary>
+            <p data-i18n="faq.a2">Point COMPOSE_SCAN_DIR at the folder that holds your stacks (up to 4 levels deep, at most 400 files). Declared ports count even when a stack is stopped — they show as configured.</p>
+          </details>
+          <details class="faq-item">
+            <summary><span data-i18n="faq.q3">Is it safe to expose Port-Light to the internet?</span></summary>
+            <p data-i18n="faq.a3">No. It serves one read-only page on your LAN — keep it behind Basic Auth or a reverse proxy and off the public internet. The security checklist has the hardening notes.</p>
+          </details>
+          <details class="faq-item">
+            <summary><span data-i18n="faq.q4">How does an agent reserve a free port?</span></summary>
+            <p data-i18n="faq.a4">GET /api/ports/suggest?reserve=true returns ports that are free right now and holds them with an expiring lease. The agent skill and MCP server wrap the same endpoints.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="limits">
       <div class="wrap" data-reveal>
         <h2 data-i18n="limits.title">A port occupancy map — not a container manager.</h2>
