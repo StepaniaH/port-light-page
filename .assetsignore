@@ -1,0 +1,9 @@
+# Never upload working-tree junk to Cloudflare Pages (gitignore-syntax).
+.git
+.github
+.openchamber
+.wrangler
+node_modules
+docs
+.DS_Store
+.assetsignore
