@@ -10,7 +10,7 @@ export default {
   'hero.cta.github': '在 GitHub 查看',
   'stats.pulls': 'Docker 拉取',
   'demo.note': '实时演示 · 模拟数据',
-  'demo.search': '试试 3000…',
+  'demo.search': "输入端口号，试试 3000…",
   'demo.counts': '{u} 个占用 · {c} 个已配置',
   'demo.free': '空闲',
   'demo.toast.listener': '{name} 开始监听 {port}',
@@ -106,4 +106,5 @@ export default {
   'theme.rose-pine-light': 'Rosé Pine 浅色',
   'theme.kanagawa-light': 'Kanagawa 浅色',
   "hero.cta.copy": "点击复制",
+  "demo.panel.hint": "互动演示：在搜索框输入端口号，或点击任意卡片复制该端口。",
 };

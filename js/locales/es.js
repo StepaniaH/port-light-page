@@ -10,7 +10,7 @@ export default {
   'hero.cta.github': 'Ver en GitHub',
   'stats.pulls': 'Descargas Docker',
   'demo.note': 'demo · datos simulados',
-  'demo.search': 'Prueba 3000…',
+  'demo.search': "Escribe un puerto · p. ej. 3000…",
   'demo.counts': '{u} en uso · {c} configurados',
   'demo.free': 'libre',
   'demo.toast.listener': '{name} ahora escucha en {port}',
@@ -106,4 +106,5 @@ export default {
   'theme.rose-pine-light': 'Rosé Pine Claro',
   'theme.kanagawa-light': 'Kanagawa Claro',
   "hero.cta.copy": "Haga clic para copiar",
+  "demo.panel.hint": "Demo interactiva: escribe un número de puerto en el cuadro de búsqueda o haz clic en una tarjeta para copiar su puerto.",
 };

@@ -155,6 +155,7 @@ a.stat-pill:hover { text-decoration: none; border-color: var(--accent); color: v
 }
 #demo-search:focus { outline: none; border-color: var(--accent); }
 #demo-search::placeholder { color: var(--text-dim); }
+.demo-search-ico { color: var(--text-dim); flex: none; }
 
 .demo-counts {
   font-family: var(--font-mono);

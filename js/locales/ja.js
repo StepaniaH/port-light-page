@@ -10,7 +10,7 @@ export default {
   'hero.cta.github': 'GitHub で見る',
   'stats.pulls': 'Docker pull 数',
   'demo.note': 'デモ · 実際のデータではありません',
-  'demo.search': '3000 を入力…',
+  'demo.search': "ポート番号を入力（例：3000）",
   'demo.counts': '使用中 {u} · 構成済み {c}',
   'demo.free': '空き',
   'demo.toast.listener': '{name} が {port} のリッスンを開始',
@@ -106,4 +106,5 @@ export default {
   'theme.rose-pine-light': 'Rosé Pine ライト',
   'theme.kanagawa-light': 'Kanagawa ライト',
   "hero.cta.copy": "クリックでコピー",
+  "demo.panel.hint": "デモ：検索ボックスにポート番号を入力するか、カードをクリックするとポートをコピーできます。",
 };

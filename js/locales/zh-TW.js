@@ -10,7 +10,7 @@ export default {
   'hero.cta.github': '在 GitHub 查看',
   'stats.pulls': 'Docker 拉取',
   'demo.note': '即時示範 · 模擬資料',
-  'demo.search': '試試 3000…',
+  'demo.search': "輸入連接埠，試試 3000…",
   'demo.counts': '{u} 個占用 · {c} 個已設定',
   'demo.free': '空閒',
   'demo.toast.listener': '{name} 開始監聽 {port}',
@@ -106,4 +106,5 @@ export default {
   'theme.rose-pine-light': 'Rosé Pine 淺色',
   'theme.kanagawa-light': 'Kanagawa 淺色',
   "hero.cta.copy": "點擊複製",
+  "demo.panel.hint": "互動示範：在搜尋框輸入連接埠號，或點擊任意卡片複製該連接埠。",
 };

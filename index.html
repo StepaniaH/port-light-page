@@ -168,13 +168,15 @@
           </div>
         </div>
         <div class="hero-demo">
-          <div class="demo-panel" aria-label="Interactive product demo (simulated data)" data-i18n-attr="aria-label:demo.panel.aria">
+          <div class="demo-panel" role="group" aria-label="Interactive product demo (simulated data)" data-i18n-attr="aria-label:demo.panel.aria">
+            <p class="sr-only" data-i18n="demo.panel.hint">Interactive demo: type a port number in the search box, or click any card to copy its port.</p>
             <span class="demo-lighthouse" aria-hidden="true">
               <svg width="24" height="24"><use href="#i-lh"/></svg>
               <i class="beam"></i>
             </span>
             <div class="demo-head">
-              <input id="demo-search" type="text" inputmode="numeric" autocomplete="off" placeholder="Try 3000…" data-i18n-attr="placeholder:demo.search;aria-label:demo.search.aria" aria-label="Search ports">
+              <svg class="demo-search-ico" width="14" height="14" aria-hidden="true"><use href="#i-search"/></svg>
+              <input id="demo-search" type="text" inputmode="numeric" autocomplete="off" placeholder="Type a port · try 3000…" data-i18n-attr="placeholder:demo.search;aria-label:demo.search.aria" aria-label="Search ports">
             </div>
             <p id="demo-counts" class="demo-counts">41 in use · 5 configured</p>
             <div id="demo-grid" class="demo-grid">

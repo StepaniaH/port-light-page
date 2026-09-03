@@ -10,7 +10,7 @@ export default {
   'hero.cta.github': 'Auf GitHub ansehen',
   'stats.pulls': 'Docker Pulls',
   'demo.note': 'Demo · simulierte Daten',
-  'demo.search': '3000 eingeben…',
+  'demo.search': "Port eingeben · z. B. 3000…",
   'demo.counts': '{u} belegt · {c} konfiguriert',
   'demo.free': 'frei',
   'demo.toast.listener': '{name} lauscht jetzt auf {port}',
@@ -106,4 +106,5 @@ export default {
   'theme.rose-pine-light': 'Rosé Pine Hell',
   'theme.kanagawa-light': 'Kanagawa Hell',
   "hero.cta.copy": "Klicken zum Kopieren",
+  "demo.panel.hint": "Interaktive Demo: Gib eine Portnummer in das Suchfeld ein oder klicke auf eine Karte, um den Port zu kopieren.",
 };
