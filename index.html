@@ -383,7 +383,10 @@ curl -s "$PORT_LIGHT_URL/api/ports/suggest?count=2&amp;reserve=true&amp;ttl=3600
 <span class="out">{
   "ports": [8081, 8082],
   "reserved": [8081, 8082],
-  "expires_at": "<span id="agents-exp">2026-08-25T13:04:11Z</span>"
+  "reservations": [
+    { "port": 8081, "expires_at": "<span class="agents-exp">2026-09-03T13:04:11Z</span>" },
+    { "port": 8082, "expires_at": "<span class="agents-exp">2026-09-03T13:04:11Z</span>" }
+  ]
 }</span></pre>
         </div>
         <div class="agents-echo" data-reveal>

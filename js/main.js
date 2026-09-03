@@ -20,7 +20,6 @@ initCopyButtons();
 initSources();
 initFeatures();
 
-const agentsExp = document.getElementById('agents-exp');
-if (agentsExp) {
-  agentsExp.textContent = new Date(Date.now() + 36e5).toISOString().replace(/\.\d+Z$/, 'Z');
+for (const el of document.querySelectorAll('.agents-exp')) {
+  el.textContent = new Date(Date.now() + 36e5).toISOString().replace(/\.\d+Z$/, 'Z');
 }
