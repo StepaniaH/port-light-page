@@ -123,17 +123,26 @@ export function initThemes(urlTheme = null) {
       card.className = 'theme-card' + (id === saved ? ' active' : '');
       card.dataset.themeCard = id;
       card.setAttribute('aria-label', themeLabel(id));
-      const swatches = document.createElement('span');
-      swatches.className = 'swatches';
-      for (const c of [bg, used, configured, free]) {
+      // Miniature of the demo panel: a search bar over a row of cells,
+      // so each card previews the UI, not just flat colors.
+      const preview = document.createElement('span');
+      preview.className = 'tpreview';
+      const bar = document.createElement('i');
+      bar.className = 'bar';
+      bar.style.background = bg;
+      const mini = document.createElement('span');
+      mini.className = 'mini';
+      mini.style.background = bg;
+      for (const c of [used, configured, free]) {
         const i = document.createElement('i');
         i.style.background = c;
-        swatches.append(i);
+        mini.append(i);
       }
+      preview.append(bar, mini);
       const name = document.createElement('span');
       name.className = 'tname';
       name.textContent = themeLabel(id);
-      card.append(swatches, name);
+      card.append(preview, name);
       card.addEventListener('click', () => applyTheme(id));
       gallery.append(card);
     }

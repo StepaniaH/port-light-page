@@ -540,8 +540,10 @@ a.stat-pill:hover { text-decoration: none; border-color: var(--accent); color: v
 }
 .theme-card:hover { transform: translateY(-3px); border-color: var(--accent); }
 .theme-card.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-.theme-card .swatches { display: flex; height: 46px; }
-.theme-card .swatches i { flex: 1; }
+.theme-card .tpreview { display: grid; gap: 5px; padding: 10px 10px 0; }
+.theme-card .tpreview .bar { display: block; height: 12px; border-radius: 4px; border: 1px solid rgba(128, 128, 128, .35); }
+.theme-card .tpreview .mini { display: flex; gap: 4px; padding: 4px; border-radius: 6px; }
+.theme-card .tpreview .mini i { flex: 1; height: 14px; border-radius: 3px; display: block; }
 .theme-card .tname {
   display: block;
   padding: 9px 12px;
