@@ -76,6 +76,7 @@ a.stat-pill:hover { text-decoration: none; border-color: var(--accent); color: v
   color: var(--text-dim);
 }
 .theme-menu button:hover { background: var(--card-hover); color: var(--text); }
+.theme-menu button:focus-visible { background: var(--card-hover); color: var(--text); }
 .theme-menu button.active { color: var(--accent); }
 
 /* ---------- hero ---------- */
