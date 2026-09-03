@@ -16,7 +16,7 @@ initDemoGrid(t);
 initThemes(new URLSearchParams(location.search).get('theme'));
 initLangMenu();
 initNavMobile();
-initStats({ starsFallback: 52, pullsFallback: 8433 });
+initStats({ starsFallback: 52, pullsFallback: 8567 });
 initReveal();
 initCopyButtons();
 initSources();

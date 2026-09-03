@@ -71,3 +71,11 @@ test('agents: reservation lines are wired to the echo grid', () => {
   assert.match(html, /class="ecell c fresh" data-port="8081"/);
   assert.match(html, /class="ecell c fresh" data-port="8082"/);
 });
+
+test('system theme default derives from the same media query in boot.js and themes.js', async () => {
+  const boot = await readFile(new URL('../../js/boot.js', import.meta.url), 'utf8');
+  const themes = await readFile(new URL('../../js/themes.js', import.meta.url), 'utf8');
+  const guard = /\(prefers-color-scheme: light\)/;
+  assert.match(boot, guard, 'boot.js pre-paint guard missing');
+  assert.match(themes, guard, 'themes.js init default missing');
+});

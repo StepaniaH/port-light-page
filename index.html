@@ -40,7 +40,7 @@
     "@type": "SoftwareApplication",
     "name": "Port-Light",
     "operatingSystem": "Linux",
-    "softwareVersion": "v0.7.7",
+    "softwareVersion": "v0.7.8",
     "applicationCategory": "DeveloperApplication",
     "description": "A local web dashboard that shows which host ports are taken, as a traffic-light grid. Merges listen tables, Docker and Compose files into one view.",
     "url": "https://port-light-page.pages.dev/",
@@ -177,15 +177,15 @@
           <h1 data-i18n="hero.title">Know which ports are taken, and which are free.</h1>
           <p class="lead" data-i18n="hero.sub">Port-Light merges your host's listen tables, Docker, and Compose files into a single traffic-light grid, so you can tell taken ports from free ones without reaching for ss.</p>
           <div class="hero-cta">
-            <button class="btn primary" data-copy="docker pull stepaniah/port-light" data-i18n-attr="title:hero.cta.copy">
+            <button class="btn primary" data-copy="docker pull stepaniah/port-light" data-i18n-attr="title:cta.copy">
               <span class="btn-label">docker pull stepaniah/port-light</span>
               <svg class="ico-copy" width="15" height="15" aria-hidden="true"><use href="#i-copy"/></svg>
             </button>
             <a class="btn" href="https://github.com/StepaniaH/port-light" target="_blank" rel="noopener" data-i18n="hero.cta.github">View on GitHub</a>
           </div>
           <div class="hero-stats">
-            <span class="stat-pill"><b id="stat-pulls">4.7K</b>&nbsp;<span data-i18n="stats.pulls">Docker pulls</span></span>
-            <span class="stat-pill" data-app-version>v0.7.7</span>
+            <span class="stat-pill"><b id="stat-pulls">8.6K</b>&nbsp;<span data-i18n="stats.pulls">Docker pulls</span></span>
+            <span class="stat-pill" data-app-version>v0.7.8</span>
           </div>
         </div>
         <div class="hero-demo">
@@ -516,7 +516,7 @@ curl -s "$PORT_LIGHT_URL/api/ports/suggest?count=2&amp;reserve=true&amp;ttl=3600
         <div class="two-col">
           <pre class="codeblock" data-reveal><button class="copy-btn" data-i18n="copy">copy</button>services:
   port-light:
-    image: stepaniah/port-light:<span data-app-version>v0.7.7</span>
+    image: stepaniah/port-light:<span data-app-version>v0.7.8</span>
     container_name: port-light
     restart: unless-stopped
     ports:
@@ -570,9 +570,8 @@ docker compose up -d</pre>
       <div class="wrap" data-reveal>
         <h2 data-i18n="limits.title">A port occupancy map — not a container manager.</h2>
         <p class="lead" data-i18n-html="limits.body">Port-Light doesn't start or stop containers, tail logs, or replace Portainer. It serves one read-only page on your LAN — keep it behind Basic Auth or a reverse proxy and off the public internet. The <a href="https://github.com/StepaniaH/port-light/blob/main/SECURITY.md" target="_blank" rel="noopener">security checklist</a> collects the hardening notes.</p>
-        </div>
         <div class="end-cta">
-          <button class="btn primary" data-copy="docker pull stepaniah/port-light" data-i18n-attr="title:hero.cta.copy">
+          <button class="btn primary" data-copy="docker pull stepaniah/port-light" data-i18n-attr="title:cta.copy">
             <span class="btn-label">docker pull stepaniah/port-light</span>
             <svg class="ico-copy" width="15" height="15" aria-hidden="true"><use href="#i-copy"/></svg>
           </button>

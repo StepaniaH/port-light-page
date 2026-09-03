@@ -595,6 +595,9 @@ a.stat-pill:hover { text-decoration: none; border-color: var(--accent); color: v
 .faq-item[open] summary { color: var(--accent); }
 .faq-item[open] summary::after { transform: rotate(45deg); color: var(--accent); }
 .faq-item p { margin: 0; padding: 0 18px 14px; color: var(--text-dim); font-size: .92rem; }
+@media (prefers-reduced-motion: reduce) {
+  .faq-item summary::after, .agents-res { transition: none; }
+}
 
 /* ---------- limits ---------- */
 .limits {

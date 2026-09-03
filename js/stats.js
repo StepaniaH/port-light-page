@@ -6,7 +6,7 @@
 
 const fmtK = (n) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, '')}K` : `${n}`);
 
-export function initStats({ starsFallback = 47, pullsFallback = 4745 } = {}) {
+export function initStats({ starsFallback = 52, pullsFallback = 8567 } = {}) {
   const stars = document.getElementById('stat-stars');
   const pulls = document.getElementById('stat-pulls');
   if (!stars || !pulls) return;
