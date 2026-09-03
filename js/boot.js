@@ -19,3 +19,13 @@ document.documentElement.classList.add('js');
     setTimeout(function () { document.documentElement.classList.remove('lang-pending'); }, 1500);
   }
 })();
+
+// Pre-paint theme guard: follow the system preference until the visitor
+// picks a theme explicitly (main.js initThemes derives the same default).
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem('pl-theme'); } catch (e) {}
+  if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();

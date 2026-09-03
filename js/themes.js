@@ -44,10 +44,14 @@ export function getTheme() {
   return document.documentElement.dataset.theme || 'dark';
 }
 
-export function applyTheme(id) {
+let themeAnimTimer = 0;
+
+export function applyTheme(id, { animate = true, persist = true } = {}) {
   if (!THEMES.includes(id)) id = 'dark';
   document.documentElement.dataset.theme = id;
-  try { localStorage.setItem('pl-theme', id); } catch { /* private mode */ }
+  if (persist) {
+    try { localStorage.setItem('pl-theme', id); } catch { /* private mode */ }
+  }
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta && SWATCH[id]) meta.setAttribute('content', SWATCH[id][0]);
   for (const card of document.querySelectorAll('[data-theme-card]')) {
@@ -58,13 +62,20 @@ export function applyTheme(id) {
     btn.classList.toggle('active', active);
     btn.setAttribute('aria-selected', String(active));
   }
+  const root = document.documentElement;
+  if (animate && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    root.classList.add('theme-anim');
+    clearTimeout(themeAnimTimer);
+    themeAnimTimer = setTimeout(() => root.classList.remove('theme-anim'), 400);
+  }
 }
 
 export function initThemes(urlTheme = null) {
-  let saved = 'dark';
-  try { saved = localStorage.getItem('pl-theme') ?? 'dark'; } catch { /* private mode */ }
+  let saved = null;
+  try { saved = localStorage.getItem('pl-theme'); } catch { /* private mode */ }
+  if (!saved && matchMedia('(prefers-color-scheme: light)').matches) saved = 'light';
   if (THEMES.includes(urlTheme)) saved = urlTheme;
-  applyTheme(saved);
+  applyTheme(saved ?? 'dark', { animate: false, persist: false });
 
   const menu = document.getElementById('theme-menu');
   const btn = document.getElementById('nav-theme-btn');
