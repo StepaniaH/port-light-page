@@ -40,6 +40,7 @@
     "@type": "SoftwareApplication",
     "name": "Port-Light",
     "operatingSystem": "Linux",
+    "softwareVersion": "v0.7.7",
     "applicationCategory": "DeveloperApplication",
     "description": "A local web dashboard that shows which host ports are taken, as a traffic-light grid. Merges listen tables, Docker and Compose files into one view.",
     "url": "https://port-light-page.pages.dev/",
@@ -100,7 +101,7 @@
           </div>
           <div class="hero-stats">
             <span class="stat-pill"><b id="stat-pulls">4.7K</b>&nbsp;<span data-i18n="stats.pulls">Docker pulls</span></span>
-            <span class="stat-pill" data-app-version>v0.7.2</span>
+            <span class="stat-pill" data-app-version>v0.7.7</span>
           </div>
         </div>
         <div class="hero-demo">
@@ -413,7 +414,7 @@ curl -s "$PORT_LIGHT_URL/api/ports/suggest?count=2&amp;reserve=true&amp;ttl=3600
         <div class="two-col">
           <pre class="codeblock" data-reveal><button class="copy-btn" data-i18n="copy">copy</button>services:
   port-light:
-    image: stepaniah/port-light:<span data-app-version>v0.7.2</span>
+    image: stepaniah/port-light:<span data-app-version>v0.7.7</span>
     container_name: port-light
     restart: unless-stopped
     ports:

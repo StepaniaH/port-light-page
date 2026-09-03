@@ -14,7 +14,7 @@ document.documentElement.classList.remove('lang-pending');
 initDemoGrid(t);
 initThemes(new URLSearchParams(location.search).get('theme'));
 initLangMenu();
-initStats({ starsFallback: 47, pullsFallback: 4745 });
+initStats({ starsFallback: 52, pullsFallback: 8433 });
 initReveal();
 initCopyButtons();
 initSources();
